@@ -45,6 +45,7 @@ export default function Upload() {
     const uploadImage = async (base64EncodedImage) => {
         try {
             await fetch('https://bubba-server-test.herokuapp.com/api/upload', {
+                mode:'cors',
                 method: 'POST',
                 body: JSON.stringify({ data: base64EncodedImage }),
                 headers: { 'Content-Type': 'application/json' },

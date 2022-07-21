@@ -5,7 +5,7 @@ export default function Home() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
             try {
-                const res = await fetch('https://bubba-server-test.herokuapp.com/api/images');
+                const res = await fetch('https://bubba-server-test.herokuapp.com/api/images',{mode:'cors'});
                 const data = await res.json();
                 setImageIds(data);
             } catch (err) {

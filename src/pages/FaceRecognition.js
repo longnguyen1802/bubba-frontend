@@ -31,6 +31,7 @@ export default function Upload() {
         reader.onloadend = async () => {
             try {
                 const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
+                    mode:'cors',
                     method: 'POST',
                     body: JSON.stringify({ data: reader.result }),
                     headers: { 'Content-Type': 'application/json' },
