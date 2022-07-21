@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'cloudinary-react';
-
+import {useFetch} from '../hooks/useFetch';
 export default function Home() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
+        const {data,loading,error,reFetch} = await useFetch('https://bubba-server-test.herokuapp.com/api/images');
+        if(error){
+            reFetch();
+        }
+        setImageIds(data);
             try {
                 const res = await fetch('https://bubba-server-test.herokuapp.com/api/images',{mode:'cors'});
                 const data = await res.json();
