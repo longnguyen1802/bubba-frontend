@@ -4,16 +4,13 @@ import { Image } from 'cloudinary-react';
 export default function Home() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
-        while(!imageIds)
-        {
             try {
                 const res = await fetch('https://bubba-server-test.herokuapp.com/api/images');
                 const data = await res.json();
                 setImageIds(data);
             } catch (err) {
                 console.error(err);
-            }
-        }
+            } 
     };
     useEffect(() => {
         loadImages();
