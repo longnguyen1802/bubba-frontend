@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Alert from '../components/Alert';
-
+import axios from 'axios';
 export default function Upload() {
     const [fileInputState, setFileInputState] = useState('');
     const [previewSource, setPreviewSource] = useState('');
@@ -44,18 +44,35 @@ export default function Upload() {
 
     const uploadImage = async (base64EncodedImage) => {
         try {
-            await fetch('https://bubba-server-test.herokuapp.com/api/upload', {
-                mode:'cors',
-                method: 'POST',
-                body: JSON.stringify({ data: base64EncodedImage }),
-                headers: { 'Content-Type': 'application/json' },
-            });
+            await axios({
+                method:'post',
+                url: 'https://bubba-server-test.herokuapp.com/api/upload',
+                headers:{ 'Content-Type': 'application/json' },
+                data:{
+                    data: base64EncodedImage
+                }
+            })
             setFileInputState('');
             setPreviewSource('');
             setSuccessMsg('Image uploaded successfully');
         } catch (err) {
-            console.error(err);
-            setErrMsg('Something went wrong!');
+            try{
+                await axios({
+                    method:'post',
+                    url: 'https://bubba-server-test.herokuapp.com/api/upload',
+                    headers:{ 'Content-Type': 'application/json' },
+                    data:{
+                        data: base64EncodedImage
+                    }
+                })
+                setFileInputState('');
+                setPreviewSource('');
+                setSuccessMsg('Image uploaded successfully');
+            }
+            catch{
+                console.error(err);
+                setErrMsg('Something went wrong!');
+            }  
         }
     };
     return (

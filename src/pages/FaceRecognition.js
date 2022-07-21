@@ -40,8 +40,21 @@ export default function Upload() {
                 setPreviewSource('');
                 setImageIds(await response.json())
             } catch (err) {
-                console.error(err);
-                setErrMsg('Something went wrong!');
+                try{
+                    const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
+                    mode:'cors',
+                    method: 'POST',
+                    body: JSON.stringify({ data: reader.result }),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                setFileInputState('');
+                setPreviewSource('');
+                setImageIds(await response.json())
+                }
+                catch(err){
+                    console.error(err);
+                    setErrMsg('Something went wrong!');
+                }
             }
         };
         reader.onerror = () => {
