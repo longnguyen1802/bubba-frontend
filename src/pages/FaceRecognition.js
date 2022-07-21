@@ -29,19 +29,24 @@ export default function Upload() {
         const reader = new FileReader();
         reader.readAsDataURL(selectedFile);
         reader.onloadend = async () => {
-            try {
-                const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
-                    method: 'POST',
-                    body: JSON.stringify({ data: reader.result }),
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                setFileInputState('');
-                setPreviewSource('');
-                setImageIds(await response.json())
-            } catch (err) {
-                console.error(err);
-                setErrMsg('Something went wrong!');
+            while(!imageIds)
+            {
+                try {
+                    const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
+                        method: 'POST',
+                        body: JSON.stringify({ data: reader.result }),
+                        headers: { 'Content-Type': 'application/json' },
+                    });
+                    setFileInputState('');
+                    setPreviewSource('');
+                    setImageIds(await response.json())
+                    break;
+                } catch (err) {
+                    console.error(err);
+                    setErrMsg('Something went wrong!');
+                }
             }
+            
         };
         reader.onerror = () => {
             console.error('AHHHHHHHH!!');
