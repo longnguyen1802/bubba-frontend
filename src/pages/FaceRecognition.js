@@ -84,7 +84,7 @@ export default function Upload() {
                 />
                 <button className="btn" type="submit">
                     {
-                        search ? "Search" : "Searching in process ...."
+                        search ?  "Searching in process ...." : "Search"
                     }
                 </button>
             </form>
