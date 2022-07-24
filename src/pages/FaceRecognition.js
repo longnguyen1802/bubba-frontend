@@ -7,6 +7,7 @@ export default function Upload() {
     const [selectedFile, setSelectedFile] = useState();
     const [imageIds, setImageIds] = useState();
     const [errMsg, setErrMsg] = useState('');
+    const [search,setSearch] = useState(false);
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
         previewFile(file);
@@ -24,6 +25,7 @@ export default function Upload() {
     };
 
     const handleSearch = (e) => {
+        setSearch(true);
         e.preventDefault();
         if (!selectedFile) return;
         const reader = new FileReader();
@@ -38,7 +40,8 @@ export default function Upload() {
                 });
                 setFileInputState('');
                 setPreviewSource('');
-                setImageIds(await response.json())
+                setImageIds(await response.json());
+                setSearch(true);
             } catch (err) {
                 try{
                     const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
@@ -49,7 +52,8 @@ export default function Upload() {
                 });
                 setFileInputState('');
                 setPreviewSource('');
-                setImageIds(await response.json())
+                setImageIds(await response.json());
+                setSearch(true);
                 }
                 catch(err){
                     console.error(err);
@@ -80,7 +84,9 @@ export default function Upload() {
                     className="form-input"
                 />
                 <button className="btn" type="submit">
-                    Search
+                    {
+                        search ? "Search" : "Searching in process ...."
+                    }
                 </button>
             </form>
             {previewSource && (
