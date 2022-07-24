@@ -41,7 +41,7 @@ export default function Upload() {
                 setFileInputState('');
                 setPreviewSource('');
                 setImageIds(await response.json());
-                setSearch(true);
+                setSearch(false);
             } catch (err) {
                 try{
                     const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
@@ -53,7 +53,7 @@ export default function Upload() {
                 setFileInputState('');
                 setPreviewSource('');
                 setImageIds(await response.json());
-                setSearch(true);
+                setSearch(false);
                 }
                 catch(err){
                     console.error(err);
@@ -68,7 +68,6 @@ export default function Upload() {
            
     };
 
-    
     return (
         <div>
             <h1 className="title">Upload your image to search</h1>
