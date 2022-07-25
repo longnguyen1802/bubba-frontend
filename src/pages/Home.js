@@ -5,12 +5,12 @@ export default function Home() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
         try {
-            const res = await axios.get('https://bubba-server-test.herokuapp.com/api/images',{mode:'cors'});
+            const res = await axios.get('/api/images',{mode:'cors'});
             const data = await res.data;
             setImageIds(data);
         } catch (err) {
             try{
-                const res = await axios.get('https://bubba-server-test.herokuapp.com/api/images',{mode:'cors'});
+                const res = await axios.get('/api/images',{mode:'cors'});
             const data = await res.data;
             setImageIds(data);
             }

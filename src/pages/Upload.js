@@ -46,7 +46,7 @@ export default function Upload() {
         try {
             await axios({
                 method:'post',
-                url: 'https://bubba-server-test.herokuapp.com/api/upload',
+                url: 'http://localhost:3001/api/upload',
                 headers:{ 'Content-Type': 'application/json' },
                 data:{
                     data: base64EncodedImage
@@ -59,7 +59,7 @@ export default function Upload() {
             try{
                 await axios({
                     method:'post',
-                    url: 'https://bubba-server-test.herokuapp.com/api/upload',
+                    url: 'http://localhost:3001/api/upload',
                     headers:{ 'Content-Type': 'application/json' },
                     data:{
                         data: base64EncodedImage
