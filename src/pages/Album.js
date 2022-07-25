@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'cloudinary-react';
 import axios from 'axios';
-export default function Home() {
+import { useLocation } from 'react-router-dom';
+export default function Album() {
     const [imageIds, setImageIds] = useState();
-    
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
     const loadImages = async () => {
         try {
-            const res = await axios.get('https://bubba-testnet.herokuapp.com/api/image',{mode:'cors'});
-            const data = await res.data[0].files;
+            const res = await axios.get('https://bubba-testnet.herokuapp.com/api/image/album/'+id,{mode:'cors'});
+            const data = await res.data;
             setImageIds(data);
         } catch (err) {
             try{
-            const res = await axios.get('https://bubba-testnet.herokuapp.com/api/image',{mode:'cors'});
-            const data = await res.data[0].files;
-            setImageIds(data);
+                const res = await axios.get('https://bubba-testnet.herokuapp.com/api/image/album/'+id,{mode:'cors'});
+                const data = await res.data;
+                setImageIds(data);
             }
             catch(err){
                 console.error(err);
@@ -25,7 +27,7 @@ export default function Home() {
     }, []);
     return (
         <div>
-            <h1 className="title">Cloudinary Gallery</h1>
+            <h1 className="title">Album {id}</h1>
             <div className="gallery">
                 {imageIds &&
                     imageIds.map((imageId, index) => (

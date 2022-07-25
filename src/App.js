@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route ,Switch} from 'react-router-dom';
 import Upload from './pages/Upload.js';
 import Home from './pages/Home.js';
 import FacereCognition from './pages/FaceRecognition.js';
+import Album from './pages/Album.js'
 function App() {
     return (
         <div className="container">
@@ -25,8 +26,8 @@ function App() {
                 <Switch>
                     <Route component={Upload} path="/upload" />
                     <Route component = {FacereCognition} path = '/facerecognition' />
+                    <Route component={Album} path="/album/:id"/>
                     <Route component={Home} path="/" />
-                    
                 </Switch>
             </Router>
         </div>

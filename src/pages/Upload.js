@@ -6,6 +6,7 @@ export default function Upload() {
     const [previewSource, setPreviewSource] = useState('');
     const [selectedFile, setSelectedFile] = useState([]);
     //  const [dataFile,setDataFile] = useState([]);
+    const [folderName,setFolderName] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const handleFileInputChange = (e) => {
@@ -46,10 +47,11 @@ export default function Upload() {
         try {
             await axios({
                 method:'post',
-                url: 'http://localhost:3001/api/upload',
+                url: 'https://bubba-testnet.herokuapp.com/api/image/upload',
                 headers:{ 'Content-Type': 'application/json' },
                 data:{
-                    data: base64EncodedImage
+                    data: base64EncodedImage,
+                    folder: folderName
                 }
             })
             setFileInputState('');
@@ -59,7 +61,7 @@ export default function Upload() {
             try{
                 await axios({
                     method:'post',
-                    url: 'http://localhost:3001/api/upload',
+                    url: 'https://bubba-testnet.herokuapp.com/api/image/upload',
                     headers:{ 'Content-Type': 'application/json' },
                     data:{
                         data: base64EncodedImage
@@ -81,6 +83,8 @@ export default function Upload() {
             <Alert msg={errMsg} type="danger" />
             <Alert msg={successMsg} type="success" />
             <form onSubmit={handleSubmitFile} className="form">
+                <label htmlFor="" className="name">Foldername</label>
+                <input type="text" className="nameInput" onChange={e => setFolderName(e.target.value)}/>
                 <input
                     id="fileInput"
                     type="file"
