@@ -10,14 +10,21 @@ export default function Home() {
     const [date,setDate] = useState('');
     const [event,setEvent] = useState('');
     const [currentImageId,setCurrentImageId] = useState();
-    // const [listAlbum,setListAlbum] = useState([]);
+    const [credit,setCredit] = useState();
+    const [listAlbum,setListAlbum] = useState([]);
+    const [updateCredit,setUpdateCredit] = useState(false);
+    const loadCredit = async () => {
+        const res = await axios.get(URL+'/api/limit',{mode:'cors'});
+        const data = await res.data;
+        setCredit(data.limit)
+    }
     const loadData = async () => {
         try {
             const res = await axios.get(URL+'/api/image',{mode:'cors'});
             const data = await res.data;
             setImageIds(arr =>[...arr,...data]);
-            // const resp = await axios.get('http://localhost:3001/api/album',{mode:'cors'})
-            // setListAlbum(resp.data);
+            const resp = await axios.get('http://localhost:3001/api/album',{mode:'cors'})
+            setListAlbum(resp.data);
             const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
             setCurrentImageId(
                 respo.data
@@ -28,8 +35,8 @@ export default function Home() {
                 const res = await axios.get(URL+'/api/image',{mode:'cors'});
                 const data = await res.data;
                 setImageIds(arr =>[...arr,...data]);
-                // const resp = await axios.get('http://localhost:3001/api/album',{mode:'cors'})
-                // setListAlbum(resp.data);
+                const resp = await axios.get('http://localhost:3001/api/album',{mode:'cors'})
+                setListAlbum(resp.data);
                 const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
                 setCurrentImageId(
                     respo.data
@@ -42,10 +49,12 @@ export default function Home() {
         } 
     };
     useEffect( () => {
+        console.log("Update credit");
+        loadCredit();
         if(!getData){
              loadData();
         }
-    }, []);
+    }, [updateCredit]);
     const handleFilter = async () =>{
         const res = await axios.get(URL+'/api/album/find',{
             mode:'cors',
@@ -54,19 +63,21 @@ export default function Home() {
                 date:date
             }
         })
-        // setListAlbum(res.data);
+        setListAlbum(res.data);
         setCurrentImageId(
             imageIds
             .filter((e) => (res.data.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
             .map((e) => e.files)
             .flat()
-        );       
+        );     
     }
     return (
         <div>
             <h1 className="title">Cloudinary Gallery</h1>
             <br></br>
             <h2>There is current {currentImageId&& currentImageId.length} images</h2>
+            <br></br>
+            <p> You have {credit} free credit</p>
             <br></br>
             <label>Photographer</label>
             <input
@@ -89,7 +100,7 @@ export default function Home() {
             <button onClick={handleFilter}>Filter</button> 
             <br></br>
             
-            <FacereCognition/>
+            <FacereCognition listFolder ={listAlbum}/>
             <br></br>
             <h1>Preview of all image</h1>
             <div className="gallery">

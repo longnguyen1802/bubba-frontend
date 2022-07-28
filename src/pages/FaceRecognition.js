@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Alert from '../components/Alert';
 import { Image } from 'cloudinary-react';
 import {URL} from '../components/constant.js'
-export default function Upload() {
+export default function Upload({listFolder}) {
     const [fileInputState, setFileInputState] = useState('');
     const [previewSource, setPreviewSource] = useState('');
     const [selectedFile, setSelectedFile] = useState();
@@ -36,7 +36,10 @@ export default function Upload() {
                 const response = await fetch(URL+'/api/image/find', {
                     mode:'cors',
                     method: 'POST',
-                    body: JSON.stringify({ data: reader.result,quota:50 }),
+                    body: JSON.stringify({ 
+                        data: reader.result,
+                        quota:50 ,
+                        listFolder:listFolder}),
                     headers: { 'Content-Type': 'application/json' },
                 });
                 setFileInputState('');
@@ -48,7 +51,7 @@ export default function Upload() {
                     const response = await fetch(URL+'/api/image/find', {
                     mode:'cors',
                     method: 'POST',
-                    body: JSON.stringify({ data: reader.result,quota:50 }),
+                    body: JSON.stringify({ data: reader.result,quota:50 ,listFolder:listFolder}),
                     headers: { 'Content-Type': 'application/json' },
                 });
                 setFileInputState('');
