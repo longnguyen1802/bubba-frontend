@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Alert from '../components/Alert';
 import { Image } from 'cloudinary-react';
+import {URL} from '../components/constant.js'
 export default function Upload() {
     const [fileInputState, setFileInputState] = useState('');
     const [previewSource, setPreviewSource] = useState('');
@@ -32,10 +33,10 @@ export default function Upload() {
         reader.readAsDataURL(selectedFile);
         reader.onloadend = async () => {
             try {
-                const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
+                const response = await fetch(URL+'/api/image/find', {
                     mode:'cors',
                     method: 'POST',
-                    body: JSON.stringify({ data: reader.result }),
+                    body: JSON.stringify({ data: reader.result,quota:50 }),
                     headers: { 'Content-Type': 'application/json' },
                 });
                 setFileInputState('');
@@ -44,10 +45,10 @@ export default function Upload() {
                 setSearch(false);
             } catch (err) {
                 try{
-                    const response = await fetch('https://bubba-server-test.herokuapp.com/api/findFace', {
+                    const response = await fetch(URL+'/api/image/find', {
                     mode:'cors',
                     method: 'POST',
-                    body: JSON.stringify({ data: reader.result }),
+                    body: JSON.stringify({ data: reader.result,quota:50 }),
                     headers: { 'Content-Type': 'application/json' },
                 });
                 setFileInputState('');

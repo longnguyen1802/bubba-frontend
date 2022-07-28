@@ -5,7 +5,6 @@ export default function Upload() {
     const [fileInputState, setFileInputState] = useState('');
     const [previewSource, setPreviewSource] = useState('');
     const [selectedFile, setSelectedFile] = useState([]);
-    //  const [dataFile,setDataFile] = useState([]);
     const [folderName,setFolderName] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
     const [errMsg, setErrMsg] = useState('');
@@ -27,27 +26,37 @@ export default function Upload() {
         };
     };
 
-    const handleSubmitFile = (e) => {
+    const handleSubmitFile =  async (e) => {
         e.preventDefault();
         if (!selectedFile) return;
+        // Create album
+        await axios({
+            method:'post',
+            url: 'http://localhost:3001/api/album',
+            headers:{ 'Content-Type': 'application/json' },
+            data:{
+                albumId: folderName
+            }
+        })
+        // Upload image
         for(let file of selectedFile){
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => {
+            reader.onloadend =  () => {
                 uploadImage(reader.result);
             };
             reader.onerror = () => {
                 console.error('AHHHHHHHH!!');
                 setErrMsg('something went wrong!');
             };
-        }    
+        }
     };
 
     const uploadImage = async (base64EncodedImage) => {
         try {
             await axios({
                 method:'post',
-                url: 'https://bubba-testnet.herokuapp.com/api/image/upload',
+                url: 'http://localhost:3001/api/image/upload',
                 headers:{ 'Content-Type': 'application/json' },
                 data:{
                     data: base64EncodedImage,
@@ -61,10 +70,10 @@ export default function Upload() {
             try{
                 await axios({
                     method:'post',
-                    url: 'https://bubba-testnet.herokuapp.com/api/image/upload',
+                    url: 'http://localhost:3001/api/image/upload',
                     headers:{ 'Content-Type': 'application/json' },
                     data:{
-                        data: base64EncodedImage
+                        data: base64EncodedImage,
                     }
                 })
                 setFileInputState('');
