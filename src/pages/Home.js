@@ -60,7 +60,8 @@ export default function Home() {
             mode:'cors',
             params:{
                 photographer: photographer,
-                date:date
+                date:date,
+                event:event
             }
         })
         setListAlbum(res.data);
@@ -105,23 +106,7 @@ export default function Home() {
             <h1>Preview of all image</h1>
             <div className="gallery">
             {
-                // imageIds
-                // && 
-                // listAlbum
-                // &&
-                // imageIds
-                // .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
-                // .map((e) => e.files)
-                // .flat()
-                // .map((imageId,index)=>(
-                //     <Image
-                //         key={index}
-                //         cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dedaueiyq"}
-                //         publicId={imageId}
-                //         width="300"
-                //         crop="scale"
-                //     />
-                // ))
+
                 currentImageId && currentImageId.map((imageId,index)=>(
                         <Image
                         key={index}
