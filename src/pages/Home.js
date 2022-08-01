@@ -60,7 +60,8 @@ export default function Home() {
             mode:'cors',
             params:{
                 photographer: photographer,
-                date:date
+                date:date,
+                event:event
             }
         })
         setListAlbum(res.data);
