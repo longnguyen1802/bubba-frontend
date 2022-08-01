@@ -109,7 +109,7 @@ export default function Home() {
                 currentImageId && currentImageId.map((imageId,index)=>(
                         <Image
                         key={index}
-                        cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dedaueiyq"}
+                        cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
                         publicId={imageId}
                         width="300"
                         crop="scale"
