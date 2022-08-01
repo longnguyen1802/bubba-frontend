@@ -23,7 +23,7 @@ export default function Home() {
             const res = await axios.get(URL+'/api/image',{mode:'cors'});
             const data = await res.data;
             setImageIds(arr =>[...arr,...data]);
-            const resp = await axios.get('http://localhost:3001/api/album',{mode:'cors'})
+            const resp = await axios.get(URL+'/api/album',{mode:'cors'})
             setListAlbum(resp.data);
             const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
             setCurrentImageId(
@@ -35,7 +35,7 @@ export default function Home() {
                 const res = await axios.get(URL+'/api/image',{mode:'cors'});
                 const data = await res.data;
                 setImageIds(arr =>[...arr,...data]);
-                const resp = await axios.get('http://localhost:3001/api/album',{mode:'cors'})
+                const resp = await axios.get(URL+'/api/album',{mode:'cors'})
                 setListAlbum(resp.data);
                 const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
                 setCurrentImageId(
@@ -110,7 +110,7 @@ export default function Home() {
                 currentImageId && currentImageId.map((imageId,index)=>(
                         <Image
                         key={index}
-                        cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dedaueiyq"}
+                        cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
                         publicId={imageId}
                         width="300"
                         crop="scale"
