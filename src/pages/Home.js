@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import FacereCognition from './FaceRecognition.js';
-import {URL} from '../components/constant.js'
+import {URL} from '../components/constant.js';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import './Home.css'
+import { Link } from 'react-router-dom';
+import CatagoryModal from '../components/CatagoryModal.js';
+
 export default function Home() {
     const [imageIds, setImageIds] = useState([]);
     const [getData,setGetData] = useState(false);
@@ -13,6 +20,9 @@ export default function Home() {
     const [credit,setCredit] = useState();
     const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
+
+    const[isOpen, setIsOpen] = useState(false)
+
     const loadCredit = async () => {
         const res = await axios.get(URL+'/api/limit',{mode:'cors'});
         const data = await res.data;
@@ -72,11 +82,46 @@ export default function Home() {
             .flat()
         );     
     }
+    const showFilter = () =>{
+      console.log("test")
+    }
     return (
-        <div>
-            <h1 className="title">Cloudinary Gallery</h1>
-            <br></br>
-            <h2>There is current {currentImageId&& currentImageId.length} images</h2>
+        <div className='homepage-container'>
+            <h1 className="home-title">Explore your image</h1>
+            <div className='search-bar'> 
+              <i class="material-icons">search</i>
+              <input className='search-field' type="text" placeholder="Search here"></input>
+            </div>
+            <h3>Filter by</h3>
+            <div className='filter-container'>
+              <div className='filter-box' onClick={() => setIsOpen(true)}>
+                <LocalOfferOutlinedIcon sx={{ fontSize: 45 }} className='filter-icon' />
+                <span>Catagory</span>
+              </div>
+              {/* catagory filter popup */}
+              <CatagoryModal open={isOpen} onClose={() => setIsOpen(false)} />
+              <div className='filter-box'>
+                <CalendarMonthOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
+                <span>Date</span>
+              </div>
+              <div className='filter-box'>
+                <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
+                <span>Face</span>
+              </div>
+            </div>
+
+            <div className='album-container'>
+              <h2>What's New</h2>
+              <div className='album'>
+                <img src='' alt='album profile picture'></img>
+                <div className='album-info'>
+                  <p>Album title</p>
+                  <span>Created in yyyy/mm/dd</span>
+                </div>
+              </div>
+            </div>
+
+            {/* <h2>There is current {currentImageId&& currentImageId.length} images</h2>
             <br></br>
             <p> You have {credit} free credit</p>
             <br></br>
@@ -116,7 +161,7 @@ export default function Home() {
                     />
                 ))
             }
-            </div>
+            </div> */}
         </div>
     );
 }

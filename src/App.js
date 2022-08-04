@@ -1,11 +1,26 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Link, Route ,Switch} from 'react-router-dom';
-import Upload from './pages/Upload.js';
-import Home from './pages/Home.js';
+import { BrowserRouter as Router, Link ,Switch} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Upload from './pages/Upload';
+import Home from './pages/Home';
+import More from './pages/More';
+import Navbar from './components/Navbar';
+
 function App() {
     return (
-        <div className="container">
+      <>
+        <div className='main-container'>
+          <Navbar />
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={<Upload />} path="/upload" />
+            <Route element={<More />} path="/more" />
+          </Routes>
+        </div>
+      </>
+      
+    );
+        {/*  <div className="container">
             <Router>
                 <nav className="nav">
                     <div className="nav-brand">Bubba Demo</div>
@@ -23,8 +38,8 @@ function App() {
                     <Route component={Home} path="/" />
                 </Switch>
             </Router>
-        </div>
-    );
+        </div> */}
+    
 }
 
 export default App;
