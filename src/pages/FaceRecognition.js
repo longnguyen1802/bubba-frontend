@@ -38,7 +38,7 @@ export default function Upload({listFolder}) {
                     method: 'POST',
                     body: JSON.stringify({ 
                         data: reader.result,
-                        quota:50 ,
+                        quota:1000 ,
                         listFolder:listFolder}),
                     headers: { 'Content-Type': 'application/json' },
                 });
@@ -51,7 +51,7 @@ export default function Upload({listFolder}) {
                     const response = await fetch(URL+'/api/image/find', {
                     mode:'cors',
                     method: 'POST',
-                    body: JSON.stringify({ data: reader.result,quota:50 ,listFolder:listFolder}),
+                    body: JSON.stringify({ data: reader.result,quota:1000 ,listFolder:listFolder}),
                     headers: { 'Content-Type': 'application/json' },
                 });
                 setFileInputState('');
