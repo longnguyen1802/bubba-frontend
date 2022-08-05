@@ -1,0 +1,107 @@
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0px 20px;
+  color: #56557D;
+}
+
+.home-title {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 33px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.search-bar {
+  background: #FFFFFF;
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 12px;
+  gap: 10px;
+  color: #AFAFAF;
+}
+
+.search-field {
+  border-style: hidden;
+  height: 60px;
+  font-size: 14px;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.filter-box {
+  background: #FFFFFF;
+  border-radius: 20px;
+  height: 100px;
+  width: 100px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-icon {
+  color: #6B4D9D;
+}
+
+.filter-box span{
+  color: #AFAFAF;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.album-container {
+  position: relative;
+  width: 100%;
+}
+
+.album {
+  border-radius: 20px;
+  width: 100%;
+  height: 233px;
+  border: 1px solid #000000;
+}
+
+.album-info {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  width: 100%;
+  padding: 0px 0px 10px 16px;
+}
+
+.album-info span {
+  color: #AFAFAF;
+  font-weight: 400;
+  font-size: 14px;
+}
