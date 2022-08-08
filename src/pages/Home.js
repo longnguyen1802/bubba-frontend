@@ -3,14 +3,12 @@ import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import FacereCognition from './FaceRecognition.js';
 import {URL} from '../components/constant.js';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import './Home.css'
-<<<<<<< HEAD
 import { Link ,useNavigate} from 'react-router-dom';
 import CatagoryModal from '../components/CatagoryModal.js';
-=======
-import { Link } from 'react-router-dom';
-
->>>>>>> origin/front-end
 
 export default function Home() {
     const navigate = useNavigate();
@@ -23,12 +21,8 @@ export default function Home() {
     const [credit,setCredit] = useState();
     const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
-<<<<<<< HEAD
     const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
     const[isOpen, setIsOpen] = useState(false)
-=======
-
->>>>>>> origin/front-end
 
     const loadCredit = async () => {
         const res = await axios.get(URL+'/api/limit',{mode:'cors'});
@@ -103,14 +97,30 @@ export default function Home() {
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
-            <Link to='/search' className='search-bar'> 
+            <div className='search-bar'> 
               <i class="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
-            </Link>
+            </div>
+            <h3>Filter by</h3>
+            <div className='filter-container'>
+              <div className='filter-box' onClick={() => setIsOpen(true)}>
+                <LocalOfferOutlinedIcon sx={{ fontSize: 45 }} className='filter-icon' />
+                <span>Catagory</span>
+              </div>
+              {/* catagory filter popup */}
+              <CatagoryModal open={isOpen} onClose={() => setIsOpen(false)} />
+              <div className='filter-box'>
+                <CalendarMonthOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
+                <span>Date</span>
+              </div>
+              <div className='filter-box'>
+                <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
+                <span>Face</span>
+              </div>
+            </div>
 
             <div className='album-container'>
               <h2>What's New</h2>
-<<<<<<< HEAD
               { 
                 listAlbumThumbnail.length>0 
                 && 
@@ -131,18 +141,8 @@ export default function Home() {
                             <span>Created in yyyy/mm/dd</span>
                         </div>
                     </div>
-                ))
-                
+                ))   
               }
-=======
-              <div className='album'>
-                {/* <img src='' className='album-profile' alt='album profile picture'></img> */}
-                <Link to='/search/result/album/content' className='album-info'>
-                  <p>Album title</p>
-                  <span>Created in yyyy/mm/dd</span>
-                </Link>
-              </div>
->>>>>>> origin/front-end
             </div>
 
             {/* <h2>There is current {currentImageId&& currentImageId.length} images</h2>
