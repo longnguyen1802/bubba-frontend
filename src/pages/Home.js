@@ -7,10 +7,11 @@ import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import './Home.css'
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import CatagoryModal from '../components/CatagoryModal.js';
 
 export default function Home() {
+    const navigate = useNavigate();
     const [imageIds, setImageIds] = useState([]);
     const [getData,setGetData] = useState(false);
     const [photographer,setPhotographer] = useState('');
@@ -20,7 +21,7 @@ export default function Home() {
     const [credit,setCredit] = useState();
     const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
-
+    const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
     const[isOpen, setIsOpen] = useState(false)
 
     const loadCredit = async () => {
@@ -39,6 +40,11 @@ export default function Home() {
             setCurrentImageId(
                 respo.data
             )
+            const listData = await resp.data.forEach(async (folder) => {
+                const respon = await axios.get(URL+'/api/image/album/'+folder,{mode:'cors'});
+                const imageId = respon.data[0];
+                setListAlbumThumbnail(arr => [...arr,imageId]);
+            })
             setGetData(true);
         } catch (err) {
             try{
@@ -82,6 +88,9 @@ export default function Home() {
             .flat()
         );     
     }
+    const navigateAlbum = (albumId) =>{
+        navigate('/album/'+albumId);
+    }
     const showFilter = () =>{
       console.log("test")
     }
@@ -112,13 +121,29 @@ export default function Home() {
 
             <div className='album-container'>
               <h2>What's New</h2>
-              <div className='album'>
-                <img src='' alt='album profile picture'></img>
-                <div className='album-info'>
-                  <p>Album title</p>
-                  <span>Created in yyyy/mm/dd</span>
-                </div>
-              </div>
+              { 
+                listAlbumThumbnail.length>0 
+                && 
+                listAlbumThumbnail.map((value,index)=>(
+                    <div className='album' onClick={()=>{
+                        navigateAlbum(listAlbum[index])
+                    }}>
+                        <Image
+                            key={index}
+                            cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                            publicId={value}
+                            width="400"
+                            height="200"
+                            crop="scale"
+                        />
+                        <div className='album-info' id = {"album-"+index}>
+                            <p>Album title</p>
+                            <span>Created in yyyy/mm/dd</span>
+                        </div>
+                    </div>
+                ))
+                
+              }
             </div>
 
             {/* <h2>There is current {currentImageId&& currentImageId.length} images</h2>

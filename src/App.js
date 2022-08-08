@@ -5,16 +5,17 @@ import Upload from './pages/Upload';
 import Home from './pages/Home';
 import More from './pages/More';
 import Navbar from './components/Navbar';
-
+import Album from './pages/Album';
 function App() {
     return (
       <>
         <div className='main-container'>
           <Navbar />
           <Routes>
-            <Route element={<Home />} path="/" />
             <Route element={<Upload />} path="/upload" />
             <Route element={<More />} path="/more" />
+            <Route element={<Album/>} path="/album/:id"/>
+            <Route element={<Home />} path="/" />
           </Routes>
         </div>
       </>
