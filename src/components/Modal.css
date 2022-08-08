@@ -1,0 +1,162 @@
+.modal {
+  color: #56557D;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25px;
+  z-index: 2;
+  left: 0px;
+  height: 80%;
+  background: #FFFFFF;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.modal-face {
+  height: 35%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.divider {
+  width: 66px;
+  border: 2px solid #D9D9D9;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.modal-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.types {
+  height: 75%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 95%;
+}
+
+.types-box{
+  background: #F6F6F8;;
+  border-radius: 20px;
+  height: 85px;
+  width: 85px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 6px;
+}
+
+.modal-face .modal-title{
+  justify-content: center;
+}
+
+.close {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  margin: 10px !important;
+}
+
+.message-modal{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-text{
+  text-align: center;
+  margin: 0 38px 28px 38px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.try-face-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.try-face-modal .modal-title {
+  font-weight: 600;
+  font-size: 24px;
+  color: #777777;
+  margin: 30px 0px;
+  justify-content: center;
+}
+
+.method-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.method-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: #777777;
+} 
+
+.method-box .icon-box {
+  width: 88px;
+  height: 88px;
+  background: #D9D9D9;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.try-face-modal .divider {
+  border: 1px solid #D9D9D9;
+  width: 90%;
+}
+
+.cancel-button{
+  font-weight: 400;
+  font-size: 24px;  
+  color: #777777;
+  background: none;
+  padding: 12px 46px;
+}
+
+.go-button {
+  width: 388px;
+  background: #F6F6F8;
+}
+
+.alert-modal-quota{
+  height: 30%;
+}

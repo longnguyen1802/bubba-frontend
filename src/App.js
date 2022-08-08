@@ -3,9 +3,14 @@ import { BrowserRouter as Router, Link ,Switch} from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import Upload from './pages/Upload';
 import Home from './pages/Home';
-import More from './pages/More';
-import Navbar from './components/Navbar';
+import Search from './pages/Search';
+import Navbar from './components/Navbar';EAD
 import Album from './pages/Album';
+import SearchResultImage from './pages/SearchResultImage';
+import ImageDetail from './pages/ImageDetail';
+import SearchResultAlbum from './pages/SearchResultAlbum';
+import AlbumContent from './pages/AlbumContent';
+
 function App() {
     return (
       <>
@@ -16,6 +21,11 @@ function App() {
             <Route element={<More />} path="/more" />
             <Route element={<Album/>} path="/album/:id"/>
             <Route element={<Home />} path="/" />
+            <Route element={<Search />} path="/search" />
+            <Route element={<SearchResultImage />} path="/search/result" />
+            <Route element={<ImageDetail />} path="/search/result/image" />
+            <Route element={<SearchResultAlbum />} path="/search/result/album" />
+            <Route element={<AlbumContent />} path="/search/result/album/content" />
           </Routes>
         </div>
       </>
