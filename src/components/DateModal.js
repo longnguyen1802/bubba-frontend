@@ -3,11 +3,8 @@ import './Modal.css'
 import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import SportsTennisIcon from '@mui/icons-material/SportsTennis';
-import { sportsType } from './SportsType';
-import { Icon } from '@mui/material';
 
-export default function CatagoryModal({open, onClose}) {
+export default function DateModal({open, onClose}) {
   if(!open) return null
 
   return ReactDom.createPortal(
@@ -16,21 +13,13 @@ export default function CatagoryModal({open, onClose}) {
     <div className='modal'>
       <div className='divider' />
       <div className='modal-title'>
-        <p>Filter by catagory</p>
+        <p>Filter by date</p>
         <IconButton onClick={onClose} >
           <CloseIcon />
         </IconButton>
       </div>
       <div className='types'>
-
-        {sportsType.map((text, index) => (
-          <div className='types-box'>
-              {text.icon}
-            <span>{text.label}</span>
-          </div>
-        ))
-        }
-
+      <input type="month" id="start"></input>
       </div>
       <div className='button-container'>
         <button className='search-button button' >Search</button>

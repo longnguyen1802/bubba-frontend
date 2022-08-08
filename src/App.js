@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link ,Switch} from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import Upload from './pages/Upload';
 import Home from './pages/Home';
-import More from './pages/More';
+import Search from './pages/Search';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Upload />} path="/upload" />
-            <Route element={<More />} path="/more" />
+            <Route element={<Search />} path="/search" />
+
           </Routes>
         </div>
       </>
