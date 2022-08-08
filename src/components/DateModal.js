@@ -3,6 +3,7 @@ import './Modal.css'
 import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
 
 export default function DateModal({open, onClose}) {
   if(!open) return null
@@ -22,7 +23,7 @@ export default function DateModal({open, onClose}) {
       <input type="month" id="start"></input>
       </div>
       <div className='button-container'>
-        <button className='search-button button' >Search</button>
+        <Link to='/search/result'  className='search-button button' >Search</Link>
         <button className='clear-button button' >Clear Filter</button> 
         <button className='continue-button button'>Continue</button>
       </div>

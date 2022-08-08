@@ -6,6 +6,15 @@
   width: 100%;
   padding: 0px 20px;
   color: #56557D;
+  gap: 8px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #56557D;
 }
 
 .home-title {
@@ -88,7 +97,7 @@ h2 {
   border-radius: 20px;
   width: 100%;
   height: 233px;
-  border: 1px solid #000000;
+  box-shadow: 0px 0px 40px 2px rgba(0, 0, 0, 0.15);
 }
 
 .album-profile {
@@ -105,6 +114,7 @@ h2 {
   border: 1px solid #FFFFFF;
   width: 100%;
   padding: 0px 0px 10px 16px;
+  text-decoration: none;
 }
 
 .album-info span {
@@ -150,6 +160,7 @@ h2 {
   background: #8239F8;
   color: #FFFFFF;
   padding: 16px 152px;
+  text-decoration: none;
 }
 
 .clear-button {
@@ -197,3 +208,87 @@ h2 {
   border: 0px;
 }
 
+.search-result-title {
+  font-weight: 400;
+  font-size: 24px;
+  color: #56557D;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  gap: 10px;
+}
+
+.face-icon {
+  height: 75px;
+  width: 75px;
+  left: 0px;
+  top: 0px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 40px 2px rgba(0, 0, 0, 0.15);
+}
+
+.tag-field {
+  width: 50%;
+}
+
+.add-icon {
+  position: absolute;
+  right: 0;
+}
+
+.result-image-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 12px;
+}
+
+
+.image-box {
+  border-radius: 20px;
+  box-shadow: 0px 0px 40px 2px rgba(0, 0, 0, 0.15);
+  height: 186px;
+  width: 186px;
+}
+
+.face-filter-box {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 18px;
+  right: 20px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #AFAFAF;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.image-result-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.image-container {
+  width: 100%;
+  height: 500px;
+  box-shadow: 0px 0px 40px 2px rgba(0, 0, 0, 0.15);
+  margin-bottom: 24px;
+}
+
+.face-search-box {
+  font-weight: 400;
+  font-size: 18px;
+}

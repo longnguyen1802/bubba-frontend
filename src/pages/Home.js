@@ -92,11 +92,11 @@ export default function Home() {
             <div className='album-container'>
               <h2>What's New</h2>
               <div className='album'>
-                <img src='' className='album-profile' alt='album profile picture'></img>
-                <div className='album-info'>
+                {/* <img src='' className='album-profile' alt='album profile picture'></img> */}
+                <Link to='/search/result/album/content' className='album-info'>
                   <p>Album title</p>
                   <span>Created in yyyy/mm/dd</span>
-                </div>
+                </Link>
               </div>
             </div>
 

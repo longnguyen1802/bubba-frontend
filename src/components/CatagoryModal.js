@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import { sportsType } from './SportsType';
 import { Icon } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function CatagoryModal({open, onClose}) {
   if(!open) return null
@@ -33,7 +34,7 @@ export default function CatagoryModal({open, onClose}) {
 
       </div>
       <div className='button-container'>
-        <button className='search-button button' >Search</button>
+        <Link to='/search/result' className='search-button button' >Search</Link>
         <button className='clear-button button' >Clear Filter</button> 
         <button className='continue-button button'>Continue</button>
       </div>

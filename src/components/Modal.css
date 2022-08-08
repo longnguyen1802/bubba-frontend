@@ -81,7 +81,7 @@
   margin: 10px !important;
 }
 
-.message-face-modal{ 
+.message-modal{ 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -150,4 +150,13 @@
   color: #777777;
   background: none;
   padding: 12px 46px;
+}
+
+.go-button {
+  width: 388px;
+  background: #F6F6F8;
+}
+
+.alert-modal-quota{
+  height: 30%;
 }

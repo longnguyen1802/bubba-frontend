@@ -8,26 +8,17 @@ import { useState } from 'react';
 export default function FaceModal({open, onClose}) {
   const [isActive, setIsActive] = useState(false);
 
-
   const handleModal = () => {
-    // 👇️ toggle
-    // setIsActive(current => !current);
-
-    // 👇️ or set to true
     setIsActive(true);
   };
-
   
   if(!open) return null
-
- 
-
 
   return ReactDom.createPortal(
     <>
     <div className='overlay' />
     <div className='modal modal-face'>
-      <div className='message-face-modal' id='message-face-modal' style={{
+      <div className='message-modal' style={{
           display: isActive ? 'none' : 'flex',
         }}>
       <IconButton onClick={onClose} className='close'>

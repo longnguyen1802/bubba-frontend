@@ -5,6 +5,10 @@ import Upload from './pages/Upload';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Navbar from './components/Navbar';
+import SearchResultImage from './pages/SearchResultImage';
+import ImageDetail from './pages/ImageDetail';
+import SearchResultAlbum from './pages/SearchResultAlbum';
+import AlbumContent from './pages/AlbumContent';
 
 function App() {
     return (
@@ -15,7 +19,10 @@ function App() {
             <Route element={<Home />} path="/" />
             <Route element={<Upload />} path="/upload" />
             <Route element={<Search />} path="/search" />
-
+            <Route element={<SearchResultImage />} path="/search/result" />
+            <Route element={<ImageDetail />} path="/search/result/image" />
+            <Route element={<SearchResultAlbum />} path="/search/result/album" />
+            <Route element={<AlbumContent />} path="/search/result/album/content" />
           </Routes>
         </div>
       </>

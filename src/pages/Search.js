@@ -51,7 +51,7 @@ export default function Search() {
         <FaceModal open={FaceIsOpen} onClose={() => setFaceIsOpen(false)} />
       </div>
       <div className='button-container'>
-        <button className='search-button button' >Search</button>
+        <Link to='/search/result' className='search-button button' >Search</Link>
         <button className='clear-button button' >Clear Filter</button> 
         <button className='continue-button button'>Continue</button>
       </div>
