@@ -39,6 +39,7 @@ export default function Album() {
                             cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
                             publicId={imageId}
                             width="300"
+                            height="400"
                             crop="scale"
                         />
                     ))}
