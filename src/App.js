@@ -1,11 +1,36 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Link, Route ,Switch} from 'react-router-dom';
-import Upload from './pages/Upload.js';
-import Home from './pages/Home.js';
+import { BrowserRouter as Router, Link ,Switch} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Upload from './pages/Upload';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import Navbar from './components/Navbar';
+import Album from './pages/Album';
+import SearchResultImage from './pages/SearchResultImage';
+import ImageDetail from './pages/ImageDetail';
+import SearchResultAlbum from './pages/SearchResultAlbum';
+import AlbumContent from './pages/AlbumContent';
+
 function App() {
     return (
-        <div className="container">
+      <>
+        <div className='main-container'>
+          <Navbar />
+          <Routes>
+            <Route element={<Upload />} path="/upload" />
+            <Route element={<Album/>} path="/album/:id"/>
+            <Route element={<Search />} path="/search" />
+            <Route element={<SearchResultImage />} path="/search/result" />
+            <Route element={<ImageDetail />} path="/search/result/image" />
+            <Route element={<SearchResultAlbum />} path="/search/result/album" />
+            <Route element={<AlbumContent />} path="/search/result/album/content" />
+            <Route element={<Home />} path="/" />
+          </Routes>
+        </div>
+      </>
+      
+    );
+        {/*  <div className="container">
             <Router>
                 <nav className="nav">
                     <div className="nav-brand">Bubba Demo</div>
@@ -23,8 +48,8 @@ function App() {
                     <Route component={Home} path="/" />
                 </Switch>
             </Router>
-        </div>
-    );
+        </div> */}
+    
 }
 
 export default App;
