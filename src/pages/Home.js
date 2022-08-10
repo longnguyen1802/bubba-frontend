@@ -169,10 +169,10 @@ export default function Home() {
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
-            <div className='search-bar'> 
+            <Link to='/search' className='search-bar'> 
               <i class="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
-            </div>
+            </Link>
             <h3>Filter Album</h3>
             <div className='event-filter-container'>
               <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
