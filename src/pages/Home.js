@@ -9,7 +9,9 @@ import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import './Home.css'
 import { Link ,useNavigate} from 'react-router-dom';
 import CatagoryModal from '../components/CatagoryModal.js';
-
+import AlbumCard from '../components/AlbumCard.js';
+import FaceModal from '../components/FaceModal.js';
+import DateModal from '../components/DateModal.js';
 export default function Home() {
     const eventList = [
         "香港健球總會港青京士柏健球校際賽",
@@ -18,6 +20,7 @@ export default function Home() {
         "世界舞蹈家演藝總會第九屆世界舞蹈家錦標賽",
         "香港學界體育聯會"
     ]
+    const[FaceIsOpen, setFaceIsOpen] = useState(false)
     const navigate = useNavigate();
     const [imageIds, setImageIds] = useState([]);
     const [getData,setGetData] = useState(false);
@@ -29,6 +32,7 @@ export default function Home() {
     const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
     const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
+    const [listAllAlbum,setListAllAlbum] = useState([]);
     //const[isOpen, setIsOpen] = useState(false)
     const [listEvent,setListEvent] = useState([false,false,false,false,false]);
     const loadCredit = async () => {
@@ -45,7 +49,8 @@ export default function Home() {
             ])
             setImageIds(arr =>[...arr,...res1.data]);
             setListAlbum(res2.data);
-            setCurrentImageId(res3.data)
+            setListAllAlbum(res2.data);
+            setCurrentImageId(res3.data);
             // const res = await axios.get(URL+'/api/image',{mode:'cors'});
             // const data = await res.data;
             // setImageIds(arr =>[...arr,...data]);
@@ -105,7 +110,7 @@ export default function Home() {
         } 
     };
     useEffect( () => {
-        console.log("Update credit");
+        //console.log("Update credit");
         loadCredit();
         if(!getData){
              loadData();
@@ -121,14 +126,15 @@ export default function Home() {
                     }
                 })
             } else {
-                console.log(index);
+                //console.log(index);
                 return {
                     data: [],
                 }
             }
         }));
         const listAlbum = listResponse.map(value => value.data).flat();
-        setListAlbum(listAlbum)
+        //console.log(listAlbum);
+        setListAlbum(listAlbum);
         setCurrentImageId(
             imageIds
             .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
@@ -166,34 +172,33 @@ export default function Home() {
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
-            {/* <div className='search-bar'> 
+            {/* <Link to='/search' className='search-bar'> 
               <i class="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
-            </div> */}
-            <h3>Filter Event</h3>
-            <div className='filter-container'>
-              <div className={listEvent[0]?'filter-box':'filter-box:after'} id = "box-0" onClick={()=>{
+            </Link> */}
+            <div className='event-filter-container'>
+              <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
               }}>
                 <span>香港健球總會港青
                     <br/>京士柏健球校際賽 </span>
               </div>
-              <div className={listEvent[1]?'filter-box':'filter-box:after'} id = "box-1" onClick={async ()=> {
+              <div className={listEvent[1]?'event-box-after':'event-box'} id = "box-1" onClick={async ()=> {
                 handleFilterClick(1);
               }}>
                 <span>世界綠色組織主辦、<br/>大新銀行敢動呈獻的<br/>「地球。敢「動」行」</span>
               </div>
-              <div className={listEvent[2]?'filter-box':'filter-box:after'} id = "box-2" onClick={()=>{
+              <div className={listEvent[2]?'event-box-after':'event-box'} id = "box-2" onClick={()=>{
                 handleFilterClick(2)
               }}>
                 <span>仲夏越野賽 1</span>
               </div>
-              <div className={listEvent[3]?'filter-box':'filter-box:after'} id = "box-3" onClick={()=>{
+              <div className={listEvent[3]?'event-box-after':'event-box'} id = "box-3" onClick={()=>{
                 handleFilterClick(3)
               }}>
                 <span>世界舞蹈家演藝總會第九<br/>屆世界舞蹈家錦標賽</span>
               </div>
-              <div className={listEvent[4]?'filter-box':'filter-box:after'} id = "box-4" onClick={()=>{
+              <div className={listEvent[4]?'event-box-after':'event-box'} id = "box-4" onClick={()=>{
                 handleFilterClick(4)
               }}>
                 <span>香港學界體育聯會 <br/> 2021 -2022 年全港學<br/>界精英田徑（團體）比賽</span>
@@ -211,7 +216,7 @@ export default function Home() {
                         && 
                         listAlbumThumbnail.map((value,index)=>(
                             <div className='album' onClick={()=>{
-                                navigateAlbum(listAlbum[index])
+                                navigateAlbum(listAllAlbum[index])
                             }}>
                                 <Image
                                     key={index}
@@ -233,6 +238,8 @@ export default function Home() {
                 :
                 (
                     <div>
+                        <FacereCognition listFolder={listAlbum}/>
+                        <br></br>
                         <h1>Preview of all filter image</h1>
                         <h2>There is current {currentImageId&& currentImageId.length} images</h2>
                         <div className="gallery">

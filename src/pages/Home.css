@@ -64,7 +64,7 @@ h3 {
   background: #FFFFFF;
   color: #FFFFFF;
   border-radius: 20px;
-  height: 30px;
+  height: 100px;
   width: 100px;
   text-decoration: none;
   display: flex;
@@ -73,19 +73,8 @@ h3 {
   align-items: center;
   gap: 5px;
 }
-.filter-box:after {
-  background: #0000FF;
-  color: #0000FF;
-  border-radius: 20px;
-  height: 30px;
-  width: 100px;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
+
+
 
 .filter-icon {
   color: #6B4D9D;
@@ -107,7 +96,7 @@ h2 {
   width: 100%;
 }
 
-.album {
+.album-card-container {
   border-radius: 20px;
   width: 100%;
   height: 233px;
@@ -305,4 +294,45 @@ h2 {
 .face-search-box {
   font-weight: 400;
   font-size: 18px;
+}
+
+
+.event-filter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.event-box {
+  background: #FFFFFF;
+  border-radius: 20px;
+  height: 100px;
+  width: 150px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+  margin: 8px;
+}
+
+.event-box-after {
+  background: #6B4D9D;
+  color: #FFFFFF;
+  border-radius: 20px;
+  height: 100px;
+  width: 150px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+  margin: 8px;
 }

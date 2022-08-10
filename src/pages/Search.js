@@ -23,8 +23,8 @@ export default function Search() {
       </Link>
 
       <div className='button-group'>
-        <button class="button album-button" type="button" autoFocus >Album</button>
-        <button class="button image-button" >Image</button>
+        <button class="button album-button" >Album</button>
+        <button class="button image-button" type="button" autoFocus>Image</button>
       </div>
 
       <h3>Filter by</h3>
