@@ -166,34 +166,34 @@ export default function Home() {
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
-            {/* <div className='search-bar'> 
+            <div className='search-bar'> 
               <i class="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
-            </div> */}
-            <h3>Filter Event</h3>
-            <div className='filter-container'>
-              <div className={listEvent[0]?'filter-box':'filter-box:after'} id = "box-0" onClick={()=>{
+            </div>
+            <h3>Filter Album</h3>
+            <div className='event-filter-container'>
+              <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
               }}>
                 <span>香港健球總會港青
                     <br/>京士柏健球校際賽 </span>
               </div>
-              <div className={listEvent[1]?'filter-box':'filter-box:after'} id = "box-1" onClick={async ()=> {
+              <div className={listEvent[1]?'event-box-after':'event-box'} id = "box-1" onClick={async ()=> {
                 handleFilterClick(1);
               }}>
                 <span>世界綠色組織主辦、<br/>大新銀行敢動呈獻的<br/>「地球。敢「動」行」</span>
               </div>
-              <div className={listEvent[2]?'filter-box':'filter-box:after'} id = "box-2" onClick={()=>{
+              <div className={listEvent[2]?'event-box-after':'event-box'} id = "box-2" onClick={()=>{
                 handleFilterClick(2)
               }}>
                 <span>仲夏越野賽 1</span>
               </div>
-              <div className={listEvent[3]?'filter-box':'filter-box:after'} id = "box-3" onClick={()=>{
+              <div className={listEvent[3]?'event-box-after':'event-box'} id = "box-3" onClick={()=>{
                 handleFilterClick(3)
               }}>
                 <span>世界舞蹈家演藝總會第九<br/>屆世界舞蹈家錦標賽</span>
               </div>
-              <div className={listEvent[4]?'filter-box':'filter-box:after'} id = "box-4" onClick={()=>{
+              <div className={listEvent[4]?'event-box-after':'event-box'} id = "box-4" onClick={()=>{
                 handleFilterClick(4)
               }}>
                 <span>香港學界體育聯會 <br/> 2021 -2022 年全港學<br/>界精英田徑（團體）比賽</span>
