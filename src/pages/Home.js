@@ -118,9 +118,9 @@ export default function Home() {
                 <span>Face</span>
               </div>
             </div>
-
+            <h2>What's New</h2>
             <div className='album-container'>
-              <h2>What's New</h2>
+              
               { 
                 listAlbumThumbnail.length>0 
                 && 
@@ -132,7 +132,7 @@ export default function Home() {
                             key={index}
                             cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
                             publicId={value}
-                            width="400"
+                            width="380"
                             height="200"
                             crop="scale"
                         />
