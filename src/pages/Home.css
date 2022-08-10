@@ -62,8 +62,22 @@ h3 {
 
 .filter-box {
   background: #FFFFFF;
+  color: #FFFFFF;
   border-radius: 20px;
-  height: 100px;
+  height: 30px;
+  width: 100px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.filter-box:after {
+  background: #0000FF;
+  color: #0000FF;
+  border-radius: 20px;
+  height: 30px;
   width: 100px;
   text-decoration: none;
   display: flex;

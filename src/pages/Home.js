@@ -11,6 +11,13 @@ import { Link ,useNavigate} from 'react-router-dom';
 import CatagoryModal from '../components/CatagoryModal.js';
 
 export default function Home() {
+    const eventList = [
+        "香港健球總會港青京士柏健球校際賽",
+        "世界綠色組織主辦",
+        "仲夏越野賽",
+        "世界舞蹈家演藝總會第九屆世界舞蹈家錦標賽",
+        "香港學界體育聯會"
+    ]
     const navigate = useNavigate();
     const [imageIds, setImageIds] = useState([]);
     const [getData,setGetData] = useState(false);
@@ -22,8 +29,8 @@ export default function Home() {
     const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
     const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
-    const[isOpen, setIsOpen] = useState(false)
-
+    //const[isOpen, setIsOpen] = useState(false)
+    const [listEvent,setListEvent] = useState([false,false,false,false,false]);
     const loadCredit = async () => {
         const res = await axios.get(URL+'/api/limit',{mode:'cors'});
         const data = await res.data;
@@ -31,32 +38,65 @@ export default function Home() {
     }
     const loadData = async () => {
         try {
-            const res = await axios.get(URL+'/api/image',{mode:'cors'});
-            const data = await res.data;
-            setImageIds(arr =>[...arr,...data]);
-            const resp = await axios.get(URL+'/api/album',{mode:'cors'})
-            setListAlbum(resp.data);
-            const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
-            setCurrentImageId(
-                respo.data
-            )
-            const listData = await resp.data.forEach(async (folder) => {
-                const respon = await axios.get(URL+'/api/image/album/'+folder,{mode:'cors'});
+            const [res1,res2,res3]= await Promise.all([
+                axios.get(URL+'/api/image',{mode:'cors'}),
+                axios.get(URL+'/api/album',{mode:'cors'}),
+                axios.get(URL+'/api/image/all',{mode:'cors'})
+            ])
+            setImageIds(arr =>[...arr,...res1.data]);
+            setListAlbum(res2.data);
+            setCurrentImageId(res3.data)
+            // const res = await axios.get(URL+'/api/image',{mode:'cors'});
+            // const data = await res.data;
+            // setImageIds(arr =>[...arr,...data]);
+            // const resp = await axios.get(URL+'/api/album',{mode:'cors'})
+            // setListAlbum(resp.data);
+            // const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
+            // setCurrentImageId(
+            //     respo.data
+            // )
+            const listData = await res2.data.forEach(async (folder) => {
+                const respon = await axios.get(URL+'/api/image/album',
+                {
+                    mode:'cors',
+                    params:{
+                        albumId: folder
+                    }
+                });
                 const imageId = respon.data[0];
                 setListAlbumThumbnail(arr => [...arr,imageId]);
             })
             setGetData(true);
         } catch (err) {
             try{
-                const res = await axios.get(URL+'/api/image',{mode:'cors'});
-                const data = await res.data;
-                setImageIds(arr =>[...arr,...data]);
-                const resp = await axios.get(URL+'/api/album',{mode:'cors'})
-                setListAlbum(resp.data);
-                const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
-                setCurrentImageId(
-                    respo.data
-                )
+                const [res1,res2,res3]= await Promise.all([
+                    axios.get(URL+'/api/image',{mode:'cors'}),
+                    axios.get(URL+'/api/album',{mode:'cors'}),
+                    axios.get(URL+'/api/image/all',{mode:'cors'})
+                ])
+                setImageIds(arr =>[...arr,...res1.data]);
+                setListAlbum(res2.data);
+                setCurrentImageId(res3.data)
+                const listData = await res2.data.forEach(async (folder) => {
+                    const respon = await axios.get(URL+'/api/image/album',
+                    {
+                        mode:'cors',
+                        params:{
+                            albumId: folder
+                        }
+                    });
+                    const imageId = respon.data[0];
+                    setListAlbumThumbnail(arr => [...arr,imageId]);
+                })
+                // const res = await axios.get(URL+'/api/image',{mode:'cors'});
+                // const data = await res.data;
+                // setImageIds(arr =>[...arr,...data]);
+                // const resp = await axios.get(URL+'/api/album',{mode:'cors'})
+                // setListAlbum(resp.data);
+                // const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
+                // setCurrentImageId(
+                //     respo.data
+                // )
                 setGetData(true);
             } catch(err){
                 setGetData(true);
@@ -71,22 +111,45 @@ export default function Home() {
              loadData();
         }
     }, [updateCredit]);
-    const handleFilter = async () =>{
-        const res = await axios.get(URL+'/api/album/find',{
-            mode:'cors',
-            params:{
-                photographer: photographer,
-                date:date,
-                event:event
+    const handleFilter = async (listBoolean) =>{
+        const listResponse = await Promise.all(listBoolean.map((value, index) => {
+            if (value) {
+                return axios.get(URL + '/api/album/find', {
+                    mode: 'cors',
+                    params: {
+                        event: eventList[index]
+                    }
+                })
+            } else {
+                console.log(index);
+                return {
+                    data: [],
+                }
             }
-        })
-        setListAlbum(res.data);
+        }));
+        const listAlbum = listResponse.map(value => value.data).flat();
+        setListAlbum(listAlbum)
         setCurrentImageId(
             imageIds
-            .filter((e) => (res.data.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
+            .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
             .map((e) => e.files)
             .flat()
-        );     
+        );  
+        // const res = await axios.get(URL+'/api/album/find',{
+        //     mode:'cors',
+        //     params:{
+        //         photographer: photographer,
+        //         date:date,
+        //         event:event
+        //     }
+        // })
+        //setListAlbum(res.data);
+        // setCurrentImageId(
+        //     imageIds
+        //     .filter((e) => (res.data.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
+        //     .map((e) => e.files)
+        //     .flat()
+        // );     
     }
     const navigateAlbum = (albumId) =>{
         navigate('/album/'+albumId);
@@ -94,57 +157,102 @@ export default function Home() {
     const showFilter = () =>{
       console.log("test")
     }
+    const handleFilterClick = (i) => {
+        const newArr = [...listEvent];
+        newArr[i] = !newArr[i];
+        handleFilter(newArr);
+        setListEvent(newArr);
+    }
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
-            <div className='search-bar'> 
+            {/* <div className='search-bar'> 
               <i class="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
-            </div>
-            <h3>Filter by</h3>
+            </div> */}
+            <h3>Filter Event</h3>
             <div className='filter-container'>
-              <div className='filter-box' onClick={() => setIsOpen(true)}>
-                <LocalOfferOutlinedIcon sx={{ fontSize: 45 }} className='filter-icon' />
-                <span>Catagory</span>
+              <div className={listEvent[0]?'filter-box':'filter-box:after'} id = "box-0" onClick={()=>{
+                handleFilterClick(0)
+              }}>
+                <span>香港健球總會港青
+                    <br/>京士柏健球校際賽 </span>
               </div>
-              {/* catagory filter popup */}
-              <CatagoryModal open={isOpen} onClose={() => setIsOpen(false)} />
-              <div className='filter-box'>
-                <CalendarMonthOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
-                <span>Date</span>
+              <div className={listEvent[1]?'filter-box':'filter-box:after'} id = "box-1" onClick={async ()=> {
+                handleFilterClick(1);
+              }}>
+                <span>世界綠色組織主辦、<br/>大新銀行敢動呈獻的<br/>「地球。敢「動」行」</span>
               </div>
-              <div className='filter-box'>
-                <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
-                <span>Face</span>
+              <div className={listEvent[2]?'filter-box':'filter-box:after'} id = "box-2" onClick={()=>{
+                handleFilterClick(2)
+              }}>
+                <span>仲夏越野賽 1</span>
+              </div>
+              <div className={listEvent[3]?'filter-box':'filter-box:after'} id = "box-3" onClick={()=>{
+                handleFilterClick(3)
+              }}>
+                <span>世界舞蹈家演藝總會第九<br/>屆世界舞蹈家錦標賽</span>
+              </div>
+              <div className={listEvent[4]?'filter-box':'filter-box:after'} id = "box-4" onClick={()=>{
+                handleFilterClick(4)
+              }}>
+                <span>香港學界體育聯會 <br/> 2021 -2022 年全港學<br/>界精英田徑（團體）比賽</span>
               </div>
             </div>
-            <h2>What's New</h2>
-            <div className='album-container'>
               
-              { 
-                listAlbumThumbnail.length>0 
-                && 
-                listAlbumThumbnail.map((value,index)=>(
-                    <div className='album' onClick={()=>{
-                        navigateAlbum(listAlbum[index])
-                    }}>
-                        <Image
-                            key={index}
-                            cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
-                            publicId={value}
-                            width="380"
-                            height="200"
-                            crop="scale"
-                        />
-                        <div className='album-info' id = {"album-"+index}>
-                            <p>Album title</p>
-                            <span>Created in yyyy/mm/dd</span>
+            {
+                listEvent.filter(Boolean).length === 0
+                ?
+                (
+                    <div className='album-container'>
+                        <h2>What's New</h2>
+                        { 
+                        listAlbumThumbnail.length>0 
+                        && 
+                        listAlbumThumbnail.map((value,index)=>(
+                            <div className='album' onClick={()=>{
+                                navigateAlbum(listAlbum[index])
+                            }}>
+                                <Image
+                                    key={index}
+                                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                                    publicId={value}
+                                    width="400"
+                                    height="200"
+                                    crop="scale"
+                                />
+                                {/* <div className='album-info' id = {"album-"+index}>
+                                    <p>Album title</p>
+                                    <span>Created in yyyy/mm/dd</span>
+                                </div> */}
+                            </div>
+                        ))   
+                        }
+                    </div>
+                )
+                :
+                (
+                    <div>
+                        <h1>Preview of all filter image</h1>
+                        <h2>There is current {currentImageId&& currentImageId.length} images</h2>
+                        <div className="gallery">
+                        {
+                            currentImageId && currentImageId.map((imageId,index)=>(
+                                    <Image
+                                    key={index}
+                                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                                    publicId={imageId}
+                                    width="300"
+                                    height="300"
+                                    crop="scale"
+                                />
+                            ))
+                        }
                         </div>
                     </div>
-                ))   
-              }
-            </div>
-
+                )
+            }
+            
             {/* <h2>There is current {currentImageId&& currentImageId.length} images</h2>
             <br></br>
             <p> You have {credit} free credit</p>
