@@ -4,9 +4,11 @@ import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { useState } from 'react';
+import PreviewModal from './PreviewModal';
 
 export default function FaceModal({open, onClose}) {
   const [isActive, setIsActive] = useState(false);
+  const[PreviewIsOpen, setPreviewIsOpen] = useState(false)
 
   const handleModal = () => {
     setIsActive(true);
@@ -21,9 +23,9 @@ export default function FaceModal({open, onClose}) {
       <div className='message-modal' style={{
           display: isActive ? 'none' : 'flex',
         }}>
-      <IconButton onClick={onClose} className='close'>
-          <CloseIcon />
-      </IconButton>
+        <IconButton onClick={onClose} className='close'>
+            <CloseIcon />
+        </IconButton>
         <div className='modal-title'>
           <p>Free Quota For You</p>
           
@@ -49,10 +51,12 @@ export default function FaceModal({open, onClose}) {
             <div className='icon-box'></div>
             <span>Camera</span>
           </div>
-          <div className='method-box gallery'>
+          <div className='method-box gallery' onClick={() => setPreviewIsOpen(true)}>
             <div className='icon-box'></div>
             <span>Gallery</span>
           </div>
+          <PreviewModal open={PreviewIsOpen} onClose={() => setPreviewIsOpen(false)} />
+
         </div>
         <div className='divider' />
         <button className='button cancel-button' onClick={onClose} >Cancel</button>
