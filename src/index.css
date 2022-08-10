@@ -38,7 +38,33 @@ code {
 img {
   border-radius: 5px;
 }
+.form {
+  margin-bottom: 2rem;
+}
 
+.form-input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.alert {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  position: fixed;
+  top: 2rem;
+  right: 0rem;
+  min-width: 200px;
+}
+
+.alert-success {
+  background-color: var(--alert-success-bg-color);
+  color: var(--alert-success-text-color);
+}
+
+.alert-danger {
+  background-color: var(--alert-danger-bg-color);
+  color: var(--alert-danger-text-color);
+}
 /* .nav {
   display: flex;
   justify-content: space-between;

@@ -66,7 +66,9 @@ export default function PreviewModal({open, onClose}) {
               </label>
 
                 
-                <button className="search-button-form button" type="submit">
+                <button className="search-button-form button" type="submit" onClick={()=>{
+                  console.log("Search");
+                }}>
                   Search
                 </button>
             </form>
