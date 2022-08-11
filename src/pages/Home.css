@@ -62,7 +62,7 @@ h3 {
 
 .filter-box {
   background: #FFFFFF;
-  color: #FFFFFF;
+  color: #AFAFAF;
   border-radius: 20px;
   height: 100px;
   width: 100px;
@@ -72,9 +72,20 @@ h3 {
   justify-content: center;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
 
+.filter-box:hover {
+  height: 118px;
+  background: #8239F8;
+  /* Hover/Purple Shadow */
+  box-shadow: 0px 5px 30px 5px rgba(51, 23, 97, 0.25);
+  color: #FFFFFF;
+}
 
+.filter-box:hover .filter-icon{
+  color: #FFFFFF;
+}
 
 .filter-icon {
   color: #6B4D9D;
@@ -157,6 +168,7 @@ h2 {
   margin: 5px;
   font-weight: 400;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .search-button {
@@ -166,21 +178,42 @@ h2 {
   text-decoration: none;
 }
 
+.search-button:hover {
+  background: #4D258E;
+}
+
 .clear-button {
   background: #F6F6F8;
 }
 
+.clear-button:hover {
+  background: #D3D3D3;
+}
+
 .continue-button {
- background: #D9D9D9;;
+  background: #D9D9D9;;
+}
+
+.continue-button:hover {
+  background: #9A9A9A;
 }
 
 .back-button {
   background: #F6F6F8;
 }
 
+.back-button:hover {
+  background: #D3D3D3;
+}
+
 .try-button {
   background: #D9D9D9;;
- }
+}
+
+
+.try-button:hover {
+  background: #9A9A9A;
+}
 
 .button-group .button {
  float: left;
@@ -275,6 +308,18 @@ h2 {
   color: #AFAFAF;
   font-weight: 400;
   font-size: 14px;
+  cursor: pointer;
+}
+
+.face-filter-box:hover {
+  background: #8239F8;
+  /* Hover/Purple Shadow */
+  box-shadow: 0px 5px 30px 5px rgba(51, 23, 97, 0.25);
+  color: #FFFFFF;
+}
+
+.face-filter-box:hover .filter-icon{
+  color: #FFFFFF;
 }
 
 .image-result-title {
