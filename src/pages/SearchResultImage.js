@@ -8,6 +8,8 @@ import AlertModal from '../components/AlertModal';
 import { useState } from 'react';
 import { Image } from 'cloudinary-react';
 import { useAPI } from '../dataContext';
+import FaceFilterBox from '../components/FaceFilterBox'
+
 export default function SearchResultImage() {
   const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
@@ -48,10 +50,7 @@ export default function SearchResultImage() {
           }
           </div>
       </div>
-      <div className='face-filter-box'>
-        <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
-        <span>Face Filter</span>
-      </div>
+      <FaceFilterBox />
       {/* If out of quota */}
       <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
     </div>

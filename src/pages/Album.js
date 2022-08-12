@@ -9,6 +9,7 @@ import AlertModal from '../components/AlertModal';
 import { Link } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import FaceFilterBox from '../components/FaceFilterBox.js';
 
 export default function Album() {
     const [imageIds, setImageIds] = useState();
@@ -72,10 +73,7 @@ export default function Album() {
                       />
                   ))}
               </div>
-              <div className='face-filter-box'>
-                <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
-                <span>Face Filter</span>
-              </div>
+              <FaceFilterBox />
               {/* If out of quota */}
               <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
             </div>
