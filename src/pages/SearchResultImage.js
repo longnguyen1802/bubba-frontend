@@ -6,11 +6,12 @@ import AddIcon from '@mui/icons-material/Add';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import AlertModal from '../components/AlertModal';
 import { useState } from 'react';
-
+import { Image } from 'cloudinary-react';
+import { useAPI } from '../dataContext';
 export default function SearchResultImage() {
+  const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
   return (
-    
     <>
     <div className='homepage-container'>
       <h2 className='search-result-title'>1564 results are found</h2>
@@ -31,14 +32,33 @@ export default function SearchResultImage() {
         </div>
        
       </div>
-      <div className='result-image-container'>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
+      <div>
+          <br></br>
+          <h1>Preview of all filter image</h1>
+          <h2>There is current {currentImageId&& currentImageId.length} images</h2>
+          <div className="gallery">
+          {
+              currentImageId && currentImageId.slice(0,20).map((imageId,index)=>(
+                      <Image
+                      key={index}
+                      cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                      publicId={imageId}
+                      width="300"
+                      height="300"
+                      crop="scale"
+                  />
+              ))
+          }
+          </div>
       </div>
+      {/* <div className='result-image-container'>
+        <Link to='/search/result/image' className='image-box'></Link>
+        <Link to='/search/result/image' className='image-box'></Link>
+        <Link to='/search/result/image' className='image-box'></Link>
+        <Link to='/search/result/image' className='image-box'></Link>
+        <Link to='/search/result/image' className='image-box'></Link>
+        <Link to='/search/result/image' className='image-box'></Link>
+      </div> */}
       <div className='face-filter-box'>
         <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
         <span>Face Filter</span>

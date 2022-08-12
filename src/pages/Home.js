@@ -3,123 +3,40 @@ import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import FacereCognition from './FaceRecognition.js';
 import {URL} from '../components/constant.js';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import './Home.css'
 import { Link ,useNavigate} from 'react-router-dom';
-import AlbumCard from '../components/AlbumCard.js'
-import { Album } from '@mui/icons-material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import CatagoryModal from '../components/CatagoryModal.js';
+import AlbumCard from '../components/AlbumCard.js';
+import FaceModal from '../components/FaceModal.js';
+import DateModal from '../components/DateModal.js';
+import { useAPI } from '../dataContext.js';
 
 export default function Home() {
+    const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
     const eventList = [
         "香港健球總會港青京士柏健球校際賽",
-        "世界綠色組織主辦大新銀行敢動呈獻「地球。敢「動」行」",
+        "世界綠色組織主辦",
         "仲夏越野賽",
         "世界舞蹈家演藝總會第九屆世界舞蹈家錦標賽",
-        "香港學界體育聯會2021-2022年全港學界精英田徑（團體）比賽"
+        "香港學界體育聯會"
     ]
+    const[FaceIsOpen, setFaceIsOpen] = useState(false)
     const navigate = useNavigate();
-    const [imageIds, setImageIds] = useState([]);
     const [getData,setGetData] = useState(false);
     const [photographer,setPhotographer] = useState('');
     const [date,setDate] = useState('');
     const [event,setEvent] = useState('');
-    const [currentImageId,setCurrentImageId] = useState();
     const [credit,setCredit] = useState();
-    const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
-    const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
-    //const[isOpen, setIsOpen] = useState(false)
     const [listEvent,setListEvent] = useState([false,false,false,false,false]);
-    const [eventName, setEventName] = useState('');
-
     const loadCredit = async () => {
         const res = await axios.get(URL+'/api/limit',{mode:'cors'});
         const data = await res.data;
         setCredit(data.limit)
     }
-    const loadData = async () => {
-        try {
-            const [res1,res2,res3]= await Promise.all([
-                axios.get(URL+'/api/image',{mode:'cors'}),
-                axios.get(URL+'/api/album',{mode:'cors'}),
-                axios.get(URL+'/api/image/all',{mode:'cors'})
-            ])
-            setImageIds(arr =>[...arr,...res1.data]);
-            setListAlbum(res2.data);
-            setCurrentImageId(res3.data)
-            // const res = await axios.get(URL+'/api/image',{mode:'cors'});
-            // const data = await res.data;
-            // setImageIds(arr =>[...arr,...data]);
-            // const resp = await axios.get(URL+'/api/album',{mode:'cors'})
-            // setListAlbum(resp.data);
-            // const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
-            // setCurrentImageId(
-            //     respo.data
-            // )
-            const listData = await res2.data.forEach(async (folder) => {
-                const respon = await axios.get(URL+'/api/image/album',
-                {
-                    mode:'cors',
-                    params:{
-                        albumId: folder
-                    }
-                });
-                const imageId = respon.data[0];
-                setListAlbumThumbnail(arr => [...arr,imageId]);
-            })
-            setGetData(true);
-        } catch (err) {
-            try{
-                const [res1,res2,res3]= await Promise.all([
-                    axios.get(URL+'/api/image',{mode:'cors'}),
-                    axios.get(URL+'/api/album',{mode:'cors'}),
-                    axios.get(URL+'/api/image/all',{mode:'cors'})
-                ])
-                setImageIds(arr =>[...arr,...res1.data]);
-                setListAlbum(res2.data);
-                setCurrentImageId(res3.data)
-                const listData = await res2.data.forEach(async (folder) => {
-                    const respon = await axios.get(URL+'/api/image/album',
-                    {
-                        mode:'cors',
-                        params:{
-                            albumId: folder
-                        }
-                    });
-                    const imageId = respon.data[0];
-                    setListAlbumThumbnail(arr => [...arr,imageId]);
-                })
-                // const res = await axios.get(URL+'/api/image',{mode:'cors'});
-                // const data = await res.data;
-                // setImageIds(arr =>[...arr,...data]);
-                // const resp = await axios.get(URL+'/api/album',{mode:'cors'})
-                // setListAlbum(resp.data);
-                // const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
-                // setCurrentImageId(
-                //     respo.data
-                // )
-                setGetData(true);
-            } catch(err){
-                setGetData(true);
-                console.error(err);
-            }   
-        } 
-    };
-    useEffect( () => {
-        console.log("Update credit");
-        loadCredit();
-        if(!getData){
-             loadData();
-        }
-    }, [updateCredit]);
     const handleFilter = async (listBoolean) =>{
         const listResponse = await Promise.all(listBoolean.map((value, index) => {
             if (value) {
@@ -130,35 +47,19 @@ export default function Home() {
                     }
                 })
             } else {
-                console.log(index);
                 return {
                     data: [],
                 }
             }
         }));
         const listAlbum = listResponse.map(value => value.data).flat();
-        setListAlbum(listAlbum)
+        setListAlbum(listAlbum);
         setCurrentImageId(
             imageIds
             .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
             .map((e) => e.files)
             .flat()
-        );  
-        // const res = await axios.get(URL+'/api/album/find',{
-        //     mode:'cors',
-        //     params:{
-        //         photographer: photographer,
-        //         date:date,
-        //         event:event
-        //     }
-        // })
-        //setListAlbum(res.data);
-        // setCurrentImageId(
-        //     imageIds
-        //     .filter((e) => (res.data.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
-        //     .map((e) => e.files)
-        //     .flat()
-        // );     
+        );   
     }
     const navigateAlbum = (albumId) =>{
         navigate('/album/'+albumId);
@@ -172,15 +73,13 @@ export default function Home() {
         handleFilter(newArr);
         setListEvent(newArr);
     }
-    const handleChange = (event) => {
-      setEventName(event.target.value);
-    };
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
-            <Link to='/search' className='search-bar'> 
+            {/* <Link to='/search' className='search-bar'> 
               <i class="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
+<<<<<<< HEAD
             </Link>
             <h3>Filter Album</h3>
             <FormControl fullWidth>
@@ -206,6 +105,9 @@ export default function Home() {
               </Select>
             </FormControl>
             {/* <div className='event-filter-container'>
+=======
+            </Link> */}
+            <div className='event-filter-container'>
               <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
               }}>
@@ -225,24 +127,14 @@ export default function Home() {
               <div className={listEvent[3]?'event-box-after':'event-box'} id = "box-3" onClick={()=>{
                 handleFilterClick(3)
               }}>
-                <span>世界舞蹈家演藝總會<br/>第九屆世界舞蹈家錦標賽</span>
+                <span>世界舞蹈家演藝總會第九<br/>屆世界舞蹈家錦標賽</span>
               </div>
               <div className={listEvent[4]?'event-box-after':'event-box'} id = "box-4" onClick={()=>{
                 handleFilterClick(4)
               }}>
-                <span>香港學界體育聯會 <br/> 2021 -2022 年<br/>全港學界精英田徑（團體）比賽</span>
+                <span>香港學界體育聯會 <br/> 2021 -2022 年全港學<br/>界精英田徑（團體）比賽</span>
               </div>
-            </div> */}
-            {/* <div className='album-container'>
-                <h2>What's New</h2>
-                    <div className='album'>
-                        <AlbumCard 
-                          title='Card title'
-                          imageSource=''
-                          caption='Created in yyyy/mm/dd' 
-                        />
-                    </div>
-            </div> */}
+            </div>
               
             {
                 listEvent.filter(Boolean).length === 0
@@ -251,51 +143,25 @@ export default function Home() {
                     <div className='album-container'>
                         <h2>What's New</h2>
                         { 
-                        listAlbumThumbnail.length > 0 
+                        listAlbumThumbnail.length>0 
                         && 
                         listAlbumThumbnail.map((value,index)=>(
                             <div className='album' onClick={()=>{
-                                navigateAlbum(listAlbum[index])
+                                navigateAlbum(listAllAlbum[index])
                             }}>
-                                {/* <Image
+                                <Image
                                     key={index}
                                     cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
                                     publicId={value}
                                     width="400"
                                     height="200"
                                     crop="scale"
-                                /> */}
+                                />
                                 {/* <div className='album-info' id = {"album-"+index}>
                                     <p>Album title</p>
                                     <span>Created in yyyy/mm/dd</span>
                                 </div> */}
-                                {/* <AlbumCard 
-                                  title={index}
-                                  index={index}
-                                  value={value}
-                                  caption={index}
-                                /> */}
-                                <Card sx={{ maxWidth: "100%", borderRadius: "20px", marginTop: "20px"}}>
-                                  <CardActionArea>
-                                      <Image
-                                        key={index}
-                                        cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
-                                        publicId={value}
-                                        className="card-image"
-                                        width="400"
-                                        height="200"
-                                        crop="scale"
-                                    />
-                                    <CardContent className='album-info'>
-                                      <Typography gutterBottom variant="h5" component="div">
-                                        Album Title
-                                      </Typography>
-                                      <Typography variant="body2" color="text.secondary">
-                                        Created in yyyy/mm/dd
-                                      </Typography>
-                                    </CardContent>
-                                  </CardActionArea>
-                                </Card>
+
                             </div>
                         ))   
                         }
@@ -304,6 +170,8 @@ export default function Home() {
                 :
                 (
                     <div>
+                        <FacereCognition listFolder={listAlbum}/>
+                        <br></br>
                         <h1>Preview of all filter image</h1>
                         <h2>There is current {currentImageId&& currentImageId.length} images</h2>
                         <div className="gallery">
