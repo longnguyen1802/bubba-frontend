@@ -11,6 +11,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 export default function Home() {
     const eventList = [
@@ -178,7 +183,7 @@ export default function Home() {
               <input className='search-field' type="text" placeholder="Search here"></input>
             </Link>
             <h3>Filter Album</h3>
-            {/* <FormControl fullWidth>
+            <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Event</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -199,8 +204,8 @@ export default function Home() {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl> */}
-            <div className='event-filter-container'>
+            </FormControl>
+            {/* <div className='event-filter-container'>
               <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
               }}>
@@ -227,7 +232,7 @@ export default function Home() {
               }}>
                 <span>香港學界體育聯會 <br/> 2021 -2022 年<br/>全港學界精英田徑（團體）比賽</span>
               </div>
-            </div>
+            </div> */}
             {/* <div className='album-container'>
                 <h2>What's New</h2>
                     <div className='album'>
@@ -264,12 +269,33 @@ export default function Home() {
                                     <p>Album title</p>
                                     <span>Created in yyyy/mm/dd</span>
                                 </div> */}
-                                <AlbumCard 
-                                  title='Card title'
+                                {/* <AlbumCard 
+                                  title={index}
                                   index={index}
                                   value={value}
-                                  caption='Created in yyyy/mm/dd' 
-                                />
+                                  caption={index}
+                                /> */}
+                                <Card sx={{ maxWidth: "100%", borderRadius: "20px", marginTop: "20px"}}>
+                                  <CardActionArea>
+                                      <Image
+                                        key={index}
+                                        cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                                        publicId={value}
+                                        className="card-image"
+                                        width="400"
+                                        height="200"
+                                        crop="scale"
+                                    />
+                                    <CardContent>
+                                      <Typography gutterBottom variant="h5" component="div">
+                                        Album Title
+                                      </Typography>
+                                      <Typography variant="body2" color="text.secondary">
+                                        Created in yyyy/mm/dd
+                                      </Typography>
+                                    </CardContent>
+                                  </CardActionArea>
+                                </Card>
                             </div>
                         ))   
                         }
