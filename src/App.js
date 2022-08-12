@@ -10,7 +10,7 @@ import SearchResultImage from './pages/SearchResultImage';
 import ImageDetail from './pages/ImageDetail';
 import SearchResultAlbum from './pages/SearchResultAlbum';
 import AlbumContent from './pages/AlbumContent';
-
+import {DataContextProvider} from './dataContext';
 function App() {
     return (
       <>
@@ -24,7 +24,11 @@ function App() {
             <Route element={<ImageDetail />} path="/search/result/image" />
             <Route element={<SearchResultAlbum />} path="/search/result/album" />
             <Route element={<AlbumContent />} path="/search/result/album/content" />
-            <Route element={<Home />} path="/" />
+            <Route element={
+              <DataContextProvider>
+                <Home />
+              </DataContextProvider> 
+            } path="/" />
           </Routes>
         </div>
       </>

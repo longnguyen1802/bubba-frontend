@@ -12,7 +12,9 @@ import CatagoryModal from '../components/CatagoryModal.js';
 import AlbumCard from '../components/AlbumCard.js';
 import FaceModal from '../components/FaceModal.js';
 import DateModal from '../components/DateModal.js';
+import { useAPI } from '../dataContext.js';
 export default function Home() {
+    const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
     const eventList = [
         "香港健球總會港青京士柏健球校際賽",
         "世界綠色組織主辦",
@@ -22,100 +24,18 @@ export default function Home() {
     ]
     const[FaceIsOpen, setFaceIsOpen] = useState(false)
     const navigate = useNavigate();
-    const [imageIds, setImageIds] = useState([]);
     const [getData,setGetData] = useState(false);
     const [photographer,setPhotographer] = useState('');
     const [date,setDate] = useState('');
     const [event,setEvent] = useState('');
-    const [currentImageId,setCurrentImageId] = useState();
     const [credit,setCredit] = useState();
-    const [listAlbum,setListAlbum] = useState([]);
     const [updateCredit,setUpdateCredit] = useState(false);
-    const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
-    const [listAllAlbum,setListAllAlbum] = useState([]);
-    //const[isOpen, setIsOpen] = useState(false)
     const [listEvent,setListEvent] = useState([false,false,false,false,false]);
     const loadCredit = async () => {
         const res = await axios.get(URL+'/api/limit',{mode:'cors'});
         const data = await res.data;
         setCredit(data.limit)
     }
-    const loadData = async () => {
-        try {
-            const [res1,res2,res3]= await Promise.all([
-                axios.get(URL+'/api/image',{mode:'cors'}),
-                axios.get(URL+'/api/album',{mode:'cors'}),
-                axios.get(URL+'/api/image/all',{mode:'cors'})
-            ])
-            setImageIds(arr =>[...arr,...res1.data]);
-            setListAlbum(res2.data);
-            setListAllAlbum(res2.data);
-            setCurrentImageId(res3.data);
-            // const res = await axios.get(URL+'/api/image',{mode:'cors'});
-            // const data = await res.data;
-            // setImageIds(arr =>[...arr,...data]);
-            // const resp = await axios.get(URL+'/api/album',{mode:'cors'})
-            // setListAlbum(resp.data);
-            // const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
-            // setCurrentImageId(
-            //     respo.data
-            // )
-            const listData = await res2.data.forEach(async (folder) => {
-                const respon = await axios.get(URL+'/api/image/album',
-                {
-                    mode:'cors',
-                    params:{
-                        albumId: folder
-                    }
-                });
-                const imageId = respon.data[0];
-                setListAlbumThumbnail(arr => [...arr,imageId]);
-            })
-            setGetData(true);
-        } catch (err) {
-            try{
-                const [res1,res2,res3]= await Promise.all([
-                    axios.get(URL+'/api/image',{mode:'cors'}),
-                    axios.get(URL+'/api/album',{mode:'cors'}),
-                    axios.get(URL+'/api/image/all',{mode:'cors'})
-                ])
-                setImageIds(arr =>[...arr,...res1.data]);
-                setListAlbum(res2.data);
-                setCurrentImageId(res3.data)
-                const listData = await res2.data.forEach(async (folder) => {
-                    const respon = await axios.get(URL+'/api/image/album',
-                    {
-                        mode:'cors',
-                        params:{
-                            albumId: folder
-                        }
-                    });
-                    const imageId = respon.data[0];
-                    setListAlbumThumbnail(arr => [...arr,imageId]);
-                })
-                // const res = await axios.get(URL+'/api/image',{mode:'cors'});
-                // const data = await res.data;
-                // setImageIds(arr =>[...arr,...data]);
-                // const resp = await axios.get(URL+'/api/album',{mode:'cors'})
-                // setListAlbum(resp.data);
-                // const respo = await axios.get(URL+'/api/image/all',{mode:'cors'});
-                // setCurrentImageId(
-                //     respo.data
-                // )
-                setGetData(true);
-            } catch(err){
-                setGetData(true);
-                console.error(err);
-            }   
-        } 
-    };
-    useEffect( () => {
-        //console.log("Update credit");
-        loadCredit();
-        if(!getData){
-             loadData();
-        }
-    }, [updateCredit]);
     const handleFilter = async (listBoolean) =>{
         const listResponse = await Promise.all(listBoolean.map((value, index) => {
             if (value) {
@@ -126,36 +46,19 @@ export default function Home() {
                     }
                 })
             } else {
-                //console.log(index);
                 return {
                     data: [],
                 }
             }
         }));
         const listAlbum = listResponse.map(value => value.data).flat();
-        //console.log(listAlbum);
         setListAlbum(listAlbum);
         setCurrentImageId(
             imageIds
             .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
             .map((e) => e.files)
             .flat()
-        );  
-        // const res = await axios.get(URL+'/api/album/find',{
-        //     mode:'cors',
-        //     params:{
-        //         photographer: photographer,
-        //         date:date,
-        //         event:event
-        //     }
-        // })
-        //setListAlbum(res.data);
-        // setCurrentImageId(
-        //     imageIds
-        //     .filter((e) => (res.data.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
-        //     .map((e) => e.files)
-        //     .flat()
-        // );     
+        );   
     }
     const navigateAlbum = (albumId) =>{
         navigate('/album/'+albumId);
