@@ -178,7 +178,7 @@ export default function Home() {
               <input className='search-field' type="text" placeholder="Search here"></input>
             </Link>
             <h3>Filter Album</h3>
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Event</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -187,16 +187,19 @@ export default function Home() {
                 label="Event"
                 onChange={handleChange}
               >
-                {eventList.map((eventName) => (
+                {eventList.map((eventName, index) => (
                   <MenuItem 
                     key={eventName}
                     value={eventName}
+                    onClick ={()=>{
+                      handleFilterClick(index)
+                    }}
                   >
                     {eventName}
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
             <div className='event-filter-container'>
               <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
@@ -263,7 +266,8 @@ export default function Home() {
                                 </div> */}
                                 <AlbumCard 
                                   title='Card title'
-                                  imageSource=''
+                                  index={index}
+                                  value={value}
                                   caption='Created in yyyy/mm/dd' 
                                 />
                             </div>

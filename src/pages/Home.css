@@ -105,6 +105,7 @@ h2 {
 .album-container {
   position: relative;
   width: 100%;
+  gap: 16px;
 }
 
 .album-card-container {
