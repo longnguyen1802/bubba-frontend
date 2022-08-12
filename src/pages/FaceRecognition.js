@@ -38,7 +38,7 @@ export default function Upload({listFolder}) {
                     method: 'POST',
                     body: JSON.stringify({ 
                         data: reader.result,
-                        quota:1000 ,
+                        quota:50 ,
                         listFolder:listFolder}),
                     headers: { 'Content-Type': 'application/json' },
                 });
@@ -51,7 +51,7 @@ export default function Upload({listFolder}) {
                     const response = await fetch(URL+'/api/image/find', {
                     mode:'cors',
                     method: 'POST',
-                    body: JSON.stringify({ data: reader.result,quota:1000 ,listFolder:listFolder}),
+                    body: JSON.stringify({ data: reader.result,quota:50 ,listFolder:listFolder}),
                     headers: { 'Content-Type': 'application/json' },
                 });
                 setFileInputState('');
@@ -74,18 +74,22 @@ export default function Upload({listFolder}) {
 
     return (
         <div>
-            <h1 className="title">Upload your image to search</h1>
+            <h1 className="title">Upload your image and use your 100 quota to search</h1>
             <Alert msg={errMsg} type="danger" />
             <form onSubmit={handleSearch} className="form">
-                <input
-                    id="fileInput"
-                    type="file"
-                    name="image"
-                    multiple
-                    onChange={handleFileInputChange}
-                    value={fileInputState}
-                    className="form-input"
-                />
+                <label for="fileInput" className='label-file button'>
+                    Choose file
+                    <input
+                        id="fileInput"
+                        type="file"
+                        name="image"
+                        multiple
+                        onChange={handleFileInputChange}
+                        value={fileInputState}
+                        className="form-input"
+                        hidden
+                    />
+                </label>
                 <button className="btn" type="submit">
                     {
                         search ?  "Searching in process ...." : "Search"

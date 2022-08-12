@@ -2,6 +2,7 @@ import React from 'react'
 import { Image } from 'cloudinary-react';
 
 export default function AlbumCard({title, value, index, caption}) {
+
   return (
     <div className='album-card-container'>
       <div className='image-container'>
