@@ -12,7 +12,13 @@ export default function Search() {
   const[CatagoryIsOpen, setCatagoryIsOpen] = useState(false)
   const[DateIsOpen, setDateIsOpen] = useState(false)
   const[FaceIsOpen, setFaceIsOpen] = useState(false)
+  const[isAlbumSearch, setIsAlbumSearch] = useState(false)
+  const[isImageSearch, setIsImageSearch] = useState(true)
 
+  const handleSearchType = () => {
+    setIsAlbumSearch(!isAlbumSearch)
+    setIsImageSearch(!isImageSearch)
+  }
 
   return (
     <div className='search-container' > 
@@ -23,8 +29,8 @@ export default function Search() {
       </Link>
 
       <div className='button-group'>
-        <button class="button album-button" >Album</button>
-        <button class="button image-button" type="button" autoFocus>Image</button>
+        <button className={isAlbumSearch?'button album-button-focus':'button album-button'} onClick={() => {handleSearchType()}}>Album</button>
+        <button className={isImageSearch?'button image-button-focus':'button image-button'} onClick={() => {handleSearchType()}}>Image</button>
       </div>
 
       <h3>Filter by</h3>
@@ -42,11 +48,16 @@ export default function Search() {
         </div>
         {/* Date filter popup */}
         <DateModal open={DateIsOpen} onClose={() => setDateIsOpen(false)} />
-
+        {isImageSearch
+        ?(
         <div className='filter-box' onClick={() => setFaceIsOpen(true)}>
           <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
           <span>Face</span>
         </div>
+        ):
+        null
+        }
+        
         {/* Face filter popup */}
         <FaceModal open={FaceIsOpen} onClose={() => setFaceIsOpen(false)} />
       </div>

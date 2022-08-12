@@ -75,6 +75,15 @@
   align-items: center;
   gap: 5px;
   margin: 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+.check-icon {
+  color: #57BC85;
+  position: absolute;
+  top: -8px;
+  right: -8px;
 }
 
 .modal-face .modal-title{
@@ -136,6 +145,7 @@
   line-height: 20px;
   text-align: center;
   color: #777777;
+  cursor: pointer;
 } 
 
 .method-box .icon-box {

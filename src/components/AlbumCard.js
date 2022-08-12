@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AlbumCard(title, imageSource, caption) {
+export default function AlbumCard({title, imageSource, caption}) {
   return (
     <div className='album-card-container'>
       <div className='image-container'>

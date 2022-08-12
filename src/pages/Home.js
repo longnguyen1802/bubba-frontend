@@ -3,20 +3,22 @@ import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import FacereCognition from './FaceRecognition.js';
 import {URL} from '../components/constant.js';
-import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import './Home.css'
 import { Link ,useNavigate} from 'react-router-dom';
-import CatagoryModal from '../components/CatagoryModal.js';
+import AlbumCard from '../components/AlbumCard.js'
+import { Album } from '@mui/icons-material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export default function Home() {
     const eventList = [
         "香港健球總會港青京士柏健球校際賽",
-        "世界綠色組織主辦",
+        "世界綠色組織主辦大新銀行敢動呈獻「地球。敢「動」行」",
         "仲夏越野賽",
         "世界舞蹈家演藝總會第九屆世界舞蹈家錦標賽",
-        "香港學界體育聯會"
+        "香港學界體育聯會2021-2022年全港學界精英田徑（團體）比賽"
     ]
     const navigate = useNavigate();
     const [imageIds, setImageIds] = useState([]);
@@ -31,6 +33,8 @@ export default function Home() {
     const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
     //const[isOpen, setIsOpen] = useState(false)
     const [listEvent,setListEvent] = useState([false,false,false,false,false]);
+    const [eventName, setEventName] = useState('');
+
     const loadCredit = async () => {
         const res = await axios.get(URL+'/api/limit',{mode:'cors'});
         const data = await res.data;
@@ -163,6 +167,9 @@ export default function Home() {
         handleFilter(newArr);
         setListEvent(newArr);
     }
+    const handleChange = (event) => {
+      setEventName(event.target.value);
+    };
     return (
         <div className='homepage-container'>
             <h1 className="home-title">Explore your image</h1>
@@ -171,6 +178,25 @@ export default function Home() {
               <input className='search-field' type="text" placeholder="Search here"></input>
             </Link>
             <h3>Filter Album</h3>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Event</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={eventName}
+                label="Event"
+                onChange={handleChange}
+              >
+                {eventList.map((eventName) => (
+                  <MenuItem 
+                    key={eventName}
+                    value={eventName}
+                  >
+                    {eventName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <div className='event-filter-container'>
               <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
@@ -191,14 +217,24 @@ export default function Home() {
               <div className={listEvent[3]?'event-box-after':'event-box'} id = "box-3" onClick={()=>{
                 handleFilterClick(3)
               }}>
-                <span>世界舞蹈家演藝總會第九<br/>屆世界舞蹈家錦標賽</span>
+                <span>世界舞蹈家演藝總會<br/>第九屆世界舞蹈家錦標賽</span>
               </div>
               <div className={listEvent[4]?'event-box-after':'event-box'} id = "box-4" onClick={()=>{
                 handleFilterClick(4)
               }}>
-                <span>香港學界體育聯會 <br/> 2021 -2022 年全港學<br/>界精英田徑（團體）比賽</span>
+                <span>香港學界體育聯會 <br/> 2021 -2022 年<br/>全港學界精英田徑（團體）比賽</span>
               </div>
             </div>
+            {/* <div className='album-container'>
+                <h2>What's New</h2>
+                    <div className='album'>
+                        <AlbumCard 
+                          title='Card title'
+                          imageSource=''
+                          caption='Created in yyyy/mm/dd' 
+                        />
+                    </div>
+            </div> */}
               
             {
                 listEvent.filter(Boolean).length === 0
@@ -207,24 +243,29 @@ export default function Home() {
                     <div className='album-container'>
                         <h2>What's New</h2>
                         { 
-                        listAlbumThumbnail.length>0 
+                        listAlbumThumbnail.length > 0 
                         && 
                         listAlbumThumbnail.map((value,index)=>(
                             <div className='album' onClick={()=>{
                                 navigateAlbum(listAlbum[index])
                             }}>
-                                <Image
+                                {/* <Image
                                     key={index}
                                     cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
                                     publicId={value}
                                     width="400"
                                     height="200"
                                     crop="scale"
-                                />
+                                /> */}
                                 {/* <div className='album-info' id = {"album-"+index}>
                                     <p>Album title</p>
                                     <span>Created in yyyy/mm/dd</span>
                                 </div> */}
+                                <AlbumCard 
+                                  title='Card title'
+                                  imageSource=''
+                                  caption='Created in yyyy/mm/dd' 
+                                />
                             </div>
                         ))   
                         }
