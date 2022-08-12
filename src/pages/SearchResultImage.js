@@ -38,7 +38,7 @@ export default function SearchResultImage() {
           <h2>There is current {currentImageId&& currentImageId.length} images</h2>
           <div className="gallery">
           {
-              currentImageId && currentImageId.map((imageId,index)=>(
+              currentImageId && currentImageId.slice(0,20).map((imageId,index)=>(
                       <Image
                       key={index}
                       cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
