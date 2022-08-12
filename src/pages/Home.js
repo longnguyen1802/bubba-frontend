@@ -286,7 +286,7 @@ export default function Home() {
                                         height="200"
                                         crop="scale"
                                     />
-                                    <CardContent>
+                                    <CardContent className='album-info'>
                                       <Typography gutterBottom variant="h5" component="div">
                                         Album Title
                                       </Typography>
