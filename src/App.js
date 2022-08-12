@@ -20,10 +20,25 @@ function App() {
             <Route element={<Upload />} path="/upload" />
             <Route element={<Album/>} path="/album/:id"/>
             <Route element={<Search />} path="/search" />
-            <Route element={<SearchResultImage />} path="/search/result" />
+            <Route element={
+              <DataContextProvider>
+                <SearchResultImage />
+              </DataContextProvider>
+            } path="/search/result" />
             <Route element={<ImageDetail />} path="/search/result/image" />
-            <Route element={<SearchResultAlbum />} path="/search/result/album" />
-            <Route element={<AlbumContent />} path="/search/result/album/content" />
+
+            <Route element={
+              <DataContextProvider>
+                <SearchResultAlbum />
+              </DataContextProvider>
+            } path="/search/result/album" />
+
+            <Route element={
+              <DataContextProvider>
+                <AlbumContent />
+              </DataContextProvider>
+            } path="/search/result/album/content" />
+
             <Route element={
               <DataContextProvider>
                 <Home />
