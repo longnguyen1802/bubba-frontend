@@ -3,9 +3,7 @@ import './Modal.css'
 import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import { sportsType } from './SportsType';
-import { Icon } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 

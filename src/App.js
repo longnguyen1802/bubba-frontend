@@ -9,7 +9,6 @@ import Album from './pages/Album';
 import SearchResultImage from './pages/SearchResultImage';
 import ImageDetail from './pages/ImageDetail';
 import SearchResultAlbum from './pages/SearchResultAlbum';
-import AlbumContent from './pages/AlbumContent';
 import {DataContextProvider} from './dataContext';
 function App() {
     return (
@@ -25,19 +24,13 @@ function App() {
                 <SearchResultImage />
               </DataContextProvider>
             } path="/search/result" />
-            <Route element={<ImageDetail />} path="/search/result/image" />
+            <Route element={<ImageDetail />} path="/search/result/image/:id" />
 
             <Route element={
               <DataContextProvider>
                 <SearchResultAlbum />
               </DataContextProvider>
             } path="/search/result/album" />
-
-            <Route element={
-              <DataContextProvider>
-                <AlbumContent />
-              </DataContextProvider>
-            } path="/search/result/album/content" />
 
             <Route element={
               <DataContextProvider>

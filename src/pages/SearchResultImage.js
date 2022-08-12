@@ -14,7 +14,7 @@ export default function SearchResultImage() {
   return (
     <>
     <div className='homepage-container'>
-      <h2 className='search-result-title'>1564 results are found</h2>
+      <h2 className='search-result-title'> {currentImageId&& currentImageId.length} results are found</h2>
       <Link to='/search' className='search-bar'> 
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
@@ -33,32 +33,21 @@ export default function SearchResultImage() {
        
       </div>
       <div>
-          <br></br>
-          <h1>Preview of all filter image</h1>
-          <h2>There is current {currentImageId&& currentImageId.length} images</h2>
-          <div className="gallery">
+          <div className="result-image-container">
           {
               currentImageId && currentImageId.slice(0,20).map((imageId,index)=>(
-                      <Image
-                      key={index}
-                      cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
-                      publicId={imageId}
-                      width="300"
-                      height="300"
-                      crop="scale"
-                  />
+                
+                    <Image
+                    key={index}
+                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                    publicId={imageId}
+                    crop="scale"
+                    className='image-box'
+                />
               ))
           }
           </div>
       </div>
-      {/* <div className='result-image-container'>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-        <Link to='/search/result/image' className='image-box'></Link>
-      </div> */}
       <div className='face-filter-box'>
         <AccountBoxOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
         <span>Face Filter</span>
