@@ -14,11 +14,12 @@ import FaceModal from '../components/FaceModal.js';
 import DateModal from '../components/DateModal.js';
 export default function Home() {
     const eventList = [
-        "香港健球總會港青京士柏健球校際賽",
-        "世界綠色組織主辦",
-        "仲夏越野賽",
-        "世界舞蹈家演藝總會第九屆世界舞蹈家錦標賽",
-        "香港學界體育聯會"
+        "Community Connect Programme",
+        "GS1 Event",
+        "Investors Matching Programme",
+        "Jumpstarter 2022",
+        "Road To GBA Start-Up Programme 2.0 Launch Event",
+        "Visit Of Shenzhen Hong Kong Macau Women Directors Alliance"
     ]
     const[FaceIsOpen, setFaceIsOpen] = useState(false)
     const navigate = useNavigate();
@@ -180,28 +181,33 @@ export default function Home() {
               <div className={listEvent[0]?'event-box-after':'event-box'} id = "box-0" onClick={()=>{
                 handleFilterClick(0)
               }}>
-                <span>香港健球總會港青
-                    <br/>京士柏健球校際賽 </span>
+                <span>Community Connect 
+                    <br/>Programme </span>
               </div>
               <div className={listEvent[1]?'event-box-after':'event-box'} id = "box-1" onClick={async ()=> {
                 handleFilterClick(1);
               }}>
-                <span>世界綠色組織主辦、<br/>大新銀行敢動呈獻的<br/>「地球。敢「動」行」</span>
+                <span>GS1 Event</span>
               </div>
               <div className={listEvent[2]?'event-box-after':'event-box'} id = "box-2" onClick={()=>{
                 handleFilterClick(2)
               }}>
-                <span>仲夏越野賽 1</span>
+                <span>Investors Matching <br/> Programme</span>
               </div>
               <div className={listEvent[3]?'event-box-after':'event-box'} id = "box-3" onClick={()=>{
                 handleFilterClick(3)
               }}>
-                <span>世界舞蹈家演藝總會第九<br/>屆世界舞蹈家錦標賽</span>
+                <span>Jumpstarter 2022</span>
               </div>
               <div className={listEvent[4]?'event-box-after':'event-box'} id = "box-4" onClick={()=>{
                 handleFilterClick(4)
               }}>
-                <span>香港學界體育聯會 <br/> 2021 -2022 年全港學<br/>界精英田徑（團體）比賽</span>
+                <span>Road To GBA <br/>Start-Up Programme 2.0 <br/>Launch Event</span>
+              </div>
+              <div className={listEvent[5]?'event-box-after':'event-box'} id = "box-4" onClick={()=>{
+                handleFilterClick(5)
+              }}>
+                <span>Visit Of Shenzhen <br/> Hong Kong Macau Women <br/> Directors Alliance</span>
               </div>
             </div>
               
