@@ -24,7 +24,7 @@ function App() {
                 <SearchResultImage />
               </DataContextProvider>
             } path="/search/result" />
-            <Route element={<ImageDetail />} path="/search/result/image/:id" />
+            <Route element={<ImageDetail />} path="/search/result/image/:albumId/:id" />
 
             <Route element={
               <DataContextProvider>
