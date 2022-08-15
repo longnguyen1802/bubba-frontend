@@ -66,7 +66,7 @@ export default function Album() {
                   imageIds.map((imageId, index) => (
                       <Image
                           key={index}
-                          cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                          cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
                           publicId={imageId}
                           crop="scale"
                           className='image-box'

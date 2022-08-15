@@ -19,11 +19,12 @@ import { CardActionArea } from '@mui/material';
 export default function Home() {
     const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
     const eventList = [
-        "香港健球總會港青京士柏健球校際賽",
-        "世界綠色組織主辦",
-        "仲夏越野賽",
-        "世界舞蹈家演藝總會第九屆世界舞蹈家錦標賽",
-        "香港學界體育聯會"
+        "Community Connect Programme",
+        "GS1 Event",
+        "Investors Matching Programme",
+        "Jumpstarter 2022",
+        "Road To GBA Start-Up Programme 2.0 Launch Event",
+        "Visit Of Shenzhen Hong Kong Macau Women Directors Alliance"
     ]
     const[FaceIsOpen, setFaceIsOpen] = useState(false)
     const navigate = useNavigate();
@@ -132,7 +133,7 @@ export default function Home() {
                                 <CardActionArea>
                                     <Image
                                       key={index}
-                                      cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                                      cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
                                       publicId={value}
                                       className="card-image"
                                       width="388"
@@ -167,7 +168,7 @@ export default function Home() {
                             currentImageId && currentImageId.map((imageId,index)=>(
                                     <Image
                                     key={index}
-                                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dfrouqxub"}
+                                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
                                     publicId={imageId}
                                     width="300"
                                     height="300"
