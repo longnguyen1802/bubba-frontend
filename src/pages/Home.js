@@ -19,11 +19,11 @@ import { CardActionArea } from '@mui/material';
 export default function Home() {
     const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
     const eventList = [
-        "Community Connect Programme",
         "GS1 Event",
+        "Community Connect Programme",
+        "Road To GBA Start-Up Programme 2.0 Launch Event",
         "Investors Matching Programme",
         "Jumpstarter 2022",
-        "Road To GBA Start-Up Programme 2.0 Launch Event",
         "Visit Of Shenzhen Hong Kong Macau Women Directors Alliance"
     ]
     const[FaceIsOpen, setFaceIsOpen] = useState(false)
