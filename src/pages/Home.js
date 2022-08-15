@@ -14,6 +14,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import ImageCard from '../components/ImageCard.js';
 
 
 export default function Home() {
@@ -166,14 +167,16 @@ export default function Home() {
                         <div className="gallery">
                         {
                             currentImageId && currentImageId.map((imageId,index)=>(
-                                    <Image
-                                    key={index}
-                                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
-                                    publicId={imageId}
-                                    width="300"
-                                    height="300"
-                                    crop="scale"
-                                />
+                                //     <Image
+                                //     key={index}
+                                //     cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
+                                //     publicId={imageId}
+                                //     width="300"
+                                //     height="300"
+                                //     crop="scale"
+                                // />
+                                <ImageCard key={index} publicId={imageId} />
+
                             ))
                         }
                         </div>

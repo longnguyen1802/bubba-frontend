@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import FaceFilterBox from '../components/FaceFilterBox.js';
+import ImageCard from '../components/ImageCard.js';
 
 export default function Album() {
     const [imageIds, setImageIds] = useState();
@@ -64,13 +65,14 @@ export default function Album() {
               <div className='result-image-container'>
                 {imageIds &&
                   imageIds.map((imageId, index) => (
-                      <Image
-                          key={index}
-                          cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
-                          publicId={imageId}
-                          crop="scale"
-                          className='image-box'
-                      />
+                      // <Image
+                      //     key={index}
+                      //     cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
+                      //     publicId={imageId}
+                      //     crop="scale"
+                      //     className='image-box'
+                      // />
+                      <ImageCard key={index} publicId={imageId} />
                   ))}
               </div>
               <FaceFilterBox />

@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { Image } from 'cloudinary-react';
 import { useAPI } from '../dataContext';
 import FaceFilterBox from '../components/FaceFilterBox'
+import ImageCard from '../components/ImageCard';
 
 export default function SearchResultImage() {
   const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
@@ -39,13 +40,15 @@ export default function SearchResultImage() {
           {
               currentImageId && currentImageId.slice(0,20).map((imageId,index)=>(
                 
-                    <Image
-                    key={index}
-                    cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
-                    publicId={imageId}
-                    crop="scale"
-                    className='image-box'
-                />
+                //     <Image
+                //     key={index}
+                //     cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
+                //     publicId={imageId}
+                //     crop="scale"
+                //     className='image-box'
+                // />
+
+                <ImageCard key={index} publicId={imageId} />
               ))
           }
           </div>
