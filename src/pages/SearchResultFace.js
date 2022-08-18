@@ -9,13 +9,13 @@ import { useAPI } from '../dataContext';
 import FaceFilterBox from '../components/FaceFilterBox'
 import ImageCard from '../components/ImageCard';
 
-export default function SearchResultImage() {
-  const {currentImageId} = useAPI()
+export default function SearchResultFace() {
+  const {faceImageId} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
   return (
     <>
     <div className='homepage-container'>
-      <h2 className='search-result-title'> {currentImageId&& currentImageId.length} results are found</h2>
+      <h2 className='search-result-title'> {faceImageId && faceImageId.length} results are found</h2>
       <Link to='/search' className='search-bar'> 
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
@@ -36,7 +36,7 @@ export default function SearchResultImage() {
       <div>
           <div className="result-image-container">
           {
-              currentImageId && currentImageId.map((imageId,index)=>(
+              faceImageId && faceImageId.map((imageId,index)=>(
                 <ImageCard key={index} publicId={imageId} />
               ))
           }

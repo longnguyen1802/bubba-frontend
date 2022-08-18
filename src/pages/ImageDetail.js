@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { Image } from 'cloudinary-react';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Link ,useLocation} from 'react-router-dom';
+import { Link ,useLocation,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { URL } from '../components/constant';
 export default function ImageDetail() {
@@ -10,6 +10,7 @@ export default function ImageDetail() {
   const location = useLocation();
   const albumId = location.pathname.split("/")[4];
   const imageId = location.pathname.split("/")[5];
+  const navigate = useNavigate();
   useEffect(()=>{
     const loadPhotograher = async () => {
       const res = await axios.get(URL+'/api/album/getphotographer',{
@@ -28,8 +29,11 @@ export default function ImageDetail() {
     <>
       <div className='homepage-container'>
         <div className='image-result-title'>
-          <IconButton>
-            <Link to='/search/result'><ArrowBackIosIcon /></Link>
+          <IconButton onClick={()=>{
+            //console.log("navigate");
+            navigate('/search/result');
+          }}>
+            <ArrowBackIosIcon />
           </IconButton>
           {<h2>Taken by {photographer}</h2>}
         </div>

@@ -11,14 +11,14 @@ import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import FaceFilterBox from '../components/FaceFilterBox.js';
 import ImageCard from '../components/ImageCard.js';
-
+import { useAPI } from '../dataContext.js';
 export default function Album() {
     const [imageIds, setImageIds] = useState();
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const[AlertIsOpen, setAlertIsOpen] = useState(false)
-    
-    const loadImages = async () => {
+    const {setListAlbum} = useAPI();
+    const loadData = async () => {
         try {
             const res = await axios.get(URL+'/api/image/album',
                 {
@@ -29,7 +29,7 @@ export default function Album() {
                 }
             );
             const data = await res.data;
-            //return data;
+            setListAlbum([id]);
             setImageIds(data);
         } catch (err) {
             try{
@@ -42,7 +42,6 @@ export default function Album() {
                 }
             );
                 const data = await res.data;
-                //return data;
                 setImageIds(data);
             }
             catch(err){
@@ -51,7 +50,7 @@ export default function Album() {
         } 
     };
     useEffect(() => {
-        loadImages();
+        loadData();
     }, []);
     return (
         <div>

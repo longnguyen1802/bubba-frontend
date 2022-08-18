@@ -9,9 +9,11 @@ export function DataContextProvider({ children }) {
     const [listAlbum,setListAlbum] = useState([]);
     const [listAlbumThumbnail,setListAlbumThumbnail] = useState([]);
     const [listAllAlbum,setListAllAlbum] = useState([]);
+    const [faceImageId,setFaceImageId] = useState();
   useEffect(() => {
     async function fetchData() {
         try{
+            //console.log("data is fetch");
             const [res1,res2,res3]= await Promise.all([
                 axios.get(URL+'/api/image',{mode:'cors'}),
                 axios.get(URL+'/api/album',{mode:'cors'}),
@@ -20,7 +22,11 @@ export function DataContextProvider({ children }) {
             setImageIds(arr =>[...arr,...res1.data]);
             setListAlbum(res2.data);
             setListAllAlbum(res2.data);
-            setCurrentImageId(res3.data);
+            if(currentImageId === undefined)
+            {
+              //console.log("data is set");
+              setCurrentImageId(res3.data);
+            }
             await res2.data.forEach(async (folder) => {
                 const respon = await axios.get(URL+'/api/image/album',
                 {
@@ -42,7 +48,11 @@ export function DataContextProvider({ children }) {
                 setImageIds(arr =>[...arr,...res1.data]);
                 setListAlbum(res2.data);
                 setListAllAlbum(res2.data);
-                setCurrentImageId(res3.data);
+                if(currentImageId === undefined)
+                {
+                  //console.log("data is set");
+                  setCurrentImageId(res3.data);
+                }
                 await res2.data.forEach(async (folder) => {
                     const respon = await axios.get(URL+'/api/image/album',
                     {
@@ -72,6 +82,8 @@ export function DataContextProvider({ children }) {
         listAllAlbum:listAllAlbum,
         setListAlbum:setListAlbum,
         setCurrentImageId:setCurrentImageId,
+        faceImageId:faceImageId,
+        setFaceImageId:setFaceImageId
       }}
     >
       {children}

@@ -10,34 +10,24 @@ import SearchResultImage from './pages/SearchResultImage';
 import ImageDetail from './pages/ImageDetail';
 import SearchResultAlbum from './pages/SearchResultAlbum';
 import {DataContextProvider} from './dataContext';
+import SearchResultFace from './pages/SearchResultFace';
 function App() {
     return (
       <>
         <div className='main-container'>
           <Navbar />
-          <Routes>
-            <Route element={<Upload />} path="/upload" />
-            <Route element={<Album/>} path="/album/:id"/>
-            <Route element={<Search />} path="/search" />
-            <Route element={
-              <DataContextProvider>
-                <SearchResultImage />
-              </DataContextProvider>
-            } path="/search/result" />
-            <Route element={<ImageDetail />} path="/search/result/image/:albumId/:id" />
-
-            <Route element={
-              <DataContextProvider>
-                <SearchResultAlbum />
-              </DataContextProvider>
-            } path="/search/result/album" />
-
-            <Route element={
-              <DataContextProvider>
-                <Home />
-              </DataContextProvider> 
-            } path="/" />
-          </Routes>
+          <DataContextProvider>
+            <Routes>
+              <Route element={<Upload />} path="/upload" />
+              <Route element={<Album/>} path="/album/:id"/>
+              <Route element={<Search />} path="/search" />
+              <Route element={<SearchResultFace />} path="/search/result/face" />
+              <Route element={<SearchResultImage />} path="/search/result" />
+              <Route element={<ImageDetail />} path="/search/result/image/:albumId/:id" />
+              <Route element={<SearchResultAlbum />} path="/search/result/album" />
+              <Route element={<Home />} path="/" />
+            </Routes>
+          </DataContextProvider>
         </div>
       </>
       

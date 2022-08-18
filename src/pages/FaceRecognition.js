@@ -12,7 +12,6 @@ export default function Upload({listFolder}) {
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
         previewFile(file);
-        
         setFileInputState(e.target.value);
         setSelectedFile(file);
     };

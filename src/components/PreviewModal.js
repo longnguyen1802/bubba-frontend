@@ -3,16 +3,18 @@ import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import './Modal.css'
-import { Image } from 'cloudinary-react';
 import {URL} from '../components/constant.js'
-
+import { useAPI } from '../dataContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function PreviewModal({open, onClose}) {
-
+  const navigate = useNavigate();
+  const {listAlbum,setFaceImageId} = useAPI();
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
-  const [imageIds, setImageIds] = useState();
+  //const [imageIds, setImageIds] = useState();
+  
   const [errMsg, setErrMsg] = useState('');
   const [search,setSearch] = useState(false);
   const handleFileInputChange = (e) => {
@@ -30,7 +32,53 @@ export default function PreviewModal({open, onClose}) {
           setPreviewSource(reader.result);
       };
   };
-
+  const handleSearch = (e) => {
+      setSearch(true);
+      e.preventDefault();
+      if (!selectedFile) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onloadend = async () => {
+          try {
+              const response = await fetch(URL+'/api/image/find', {
+                  mode:'cors',
+                  method: 'POST',
+                  body: JSON.stringify({ 
+                      data: reader.result,
+                      quota:50 ,
+                      listFolder:listAlbum}),
+                  headers: { 'Content-Type': 'application/json' },
+              });
+              setFileInputState('');
+              setPreviewSource('');
+              setFaceImageId(await response.json());
+              setSearch(false);
+              navigate('/search/result/face');
+          } catch (err) {
+              try{
+                  const response = await fetch(URL+'/api/image/find', {
+                  mode:'cors',
+                  method: 'POST',
+                  body: JSON.stringify({ data: reader.result,quota:50 ,listFolder:listAlbum}),
+                  headers: { 'Content-Type': 'application/json' },
+              });
+              setFileInputState('');
+              setPreviewSource('');
+              setFaceImageId(await response.json());
+              setSearch(false);
+              }
+              catch(err){
+                  console.error(err);
+                  setErrMsg('Something went wrong!');
+              }
+          }
+      };
+      reader.onerror = () => {
+          console.error('AHHHHHHHH!!');
+          setErrMsg('something went wrong!');
+      };
+        
+  };
   if(!open) return null
 
 
@@ -66,9 +114,7 @@ export default function PreviewModal({open, onClose}) {
               </label>
 
                 
-                <button className="search-button-form button" type="submit" onClick={()=>{
-                  console.log("Search");
-                }}>
+                <button className="search-button-form button" type="submit" onClick={handleSearch}>
                   Search
                 </button>
             </form>
