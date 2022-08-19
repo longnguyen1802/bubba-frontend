@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Alert from '../components/Alert';
+import Alert from '../components/notify/Alert';
 import axios from 'axios';
 export default function Upload() {
     const [fileInputState, setFileInputState] = useState('');

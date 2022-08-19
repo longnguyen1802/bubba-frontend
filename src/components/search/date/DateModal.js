@@ -1,5 +1,5 @@
 import React from 'react'
-import './Modal.css'
+import '../../css/Modal.css'
 import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
@@ -8,17 +8,24 @@ import "react-month-picker/css/month-picker.css";
 import DatePicker from 'react-datepicker';
 import { useState } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
-import { dateFilter } from '../util/filter/filter';
-import { useAPI } from '../dataContext';
-export default function DateModal({open, onClose}) {
-  const {listAlbum,imageIds,listAlbumThumbnail,listAllAlbum,currentImageId,setCurrentImageId,setListAlbum} = useAPI()
+import { dateFilter } from '../../../util/filter/filter';
+import { useAPI } from '../../../context/dataContext';
+export default function DateModal({open, onClose,isAlbum}) {
+  const {imageIds,setCurrentImageId,setListAlbum} = useAPI()
   const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
   if(!open) return null
   const handleSearch =async ()=>{
     const date = `${startDate.getMonth()+1}/${startDate.getFullYear()}`;
     await dateFilter(date,setListAlbum,setCurrentImageId,imageIds);
-    navigate('/search/result');
+    if(!isAlbum)
+    {
+      navigate('/search/result');
+    }
+    else{
+      navigate('/search/result/album')
+    }
+    
   }
   return ReactDom.createPortal(
     <>

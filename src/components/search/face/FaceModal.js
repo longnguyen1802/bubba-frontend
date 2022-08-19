@@ -1,5 +1,5 @@
 import React from 'react'
-import './Modal.css'
+import '../../css/Modal.css'
 import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';

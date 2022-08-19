@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link ,useLocation,useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { URL } from '../components/constant';
+import { URL } from '../components/util/constant';
 export default function ImageDetail() {
   const [photographer,setPhotographer] = useState();
   const location = useLocation();

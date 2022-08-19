@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FilterTag from '../components/FilterTag'
+import FilterTag from '../components/search/tag/FilterTag'
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import AlertModal from '../components/AlertModal';
+import AlertModal from '../components/notify/AlertModal';
 import { useState } from 'react';
-import { useAPI } from '../dataContext';
-import FaceFilterBox from '../components/FaceFilterBox'
-import ImageCard from '../components/ImageCard';
+import { useAPI } from '../context/dataContext';
+import FaceFilterBox from '../components/search/face/FaceFilterBox';
+import ImageCard from '../components/image/ImageCard';
 
 export default function SearchResultFace() {
   const {faceImageId} = useAPI()

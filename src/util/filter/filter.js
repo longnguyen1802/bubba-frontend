@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
     URL
-} from '../../components/constant';
+} from '../../components/util/constant';
 export const dateFilter = async(date, setListAlbum, setCurrentImageId, imageIds) => {
     const resp = await axios.get(URL + '/api/album/find', {
         mode: 'cors',

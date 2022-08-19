@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Alert from '../components/Alert';
 import { Image } from 'cloudinary-react';
-import {URL} from '../components/constant.js'
+import {URL} from '../components/util/constant.js'
 export default function Upload({listFolder}) {
     const [fileInputState, setFileInputState] = useState('');
     const [previewSource, setPreviewSource] = useState('');

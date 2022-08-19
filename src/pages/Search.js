@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import CatagoryModal from '../components/CatagoryModal.js';
-import FaceModal from '../components/FaceModal.js';
-import DateModal from '../components/DateModal.js';
+import CatagoryModal from '../components/search/category/CatagoryModal.js';
+import FaceModal from '../components/search/face/FaceModal.js';
+import DateModal from '../components/search/date/DateModal.js';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
@@ -47,7 +47,7 @@ export default function Search() {
           <span>Date</span>
         </div>
         {/* Date filter popup */}
-        <DateModal open={DateIsOpen} onClose={() => setDateIsOpen(false)} />
+        <DateModal open={DateIsOpen} onClose={() => setDateIsOpen(false)}  isAlbum={isAlbumSearch} />
         {isImageSearch
         ?(
         <div className='filter-box' onClick={() => setFaceIsOpen(true)}>

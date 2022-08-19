@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import {URL} from '../components/constant.js';
+import {URL} from '../components/util/constant.js';
 
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
-import AlertModal from '../components/AlertModal';
+import AlertModal from '../components/notify/AlertModal';
 import { Link } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import FaceFilterBox from '../components/FaceFilterBox.js';
-import ImageCard from '../components/ImageCard.js';
-import { useAPI } from '../dataContext.js';
+import FaceFilterBox from '../components/search/face/FaceFilterBox.js';
+import ImageCard from '../components/image/ImageCard.js';
+import { useAPI } from '../context/dataContext.js';
 export default function Album() {
     const [imageIds, setImageIds] = useState();
     const location = useLocation();

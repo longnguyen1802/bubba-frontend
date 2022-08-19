@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import ReactDom from 'react-dom'
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import './Modal.css'
-import {URL} from '../components/constant.js'
-import { useAPI } from '../dataContext';
+import '../../css/Modal.css'
+import {URL} from '../../util/constant.js'
+import { useAPI } from '../../../context/dataContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function PreviewModal({open, onClose}) {
@@ -115,7 +115,7 @@ export default function PreviewModal({open, onClose}) {
 
                 
                 <button className="search-button-form button" type="submit" onClick={handleSearch}>
-                  Search
+                  {search? "Search inprogress" : "Search"}
                 </button>
             </form>
             

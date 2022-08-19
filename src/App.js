@@ -4,12 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 import Upload from './pages/Upload';
 import Home from './pages/Home';
 import Search from './pages/Search';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar/Navbar';
 import Album from './pages/Album';
 import SearchResultImage from './pages/SearchResultImage';
 import ImageDetail from './pages/ImageDetail';
 import SearchResultAlbum from './pages/SearchResultAlbum';
-import {DataContextProvider} from './dataContext';
+import {DataContextProvider} from './context/dataContext';
 import SearchResultFace from './pages/SearchResultFace';
 function App() {
     return (

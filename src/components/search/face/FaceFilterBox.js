@@ -1,6 +1,6 @@
 import React from 'react'
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
-import FaceModal from '../components/FaceModal.js';
+import FaceModal from './FaceModal.js';
 import { useState } from 'react';
 
 export default function FaceFilterBox() {
