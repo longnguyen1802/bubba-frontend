@@ -2,6 +2,7 @@ import React, {
     useState
 } from 'react';
 import Alert from '../components/Alert';
+<<<<<<< HEAD
 import {
     Image
 } from 'cloudinary-react';
@@ -11,6 +12,11 @@ import {
 export default function Upload({
     listFolder
 }) {
+=======
+import { Image } from 'cloudinary-react';
+import {URL} from '../components/util/constant.js'
+export default function Upload({listFolder}) {
+>>>>>>> front-end-dev
     const [fileInputState, setFileInputState] = useState('');
     const [previewSource, setPreviewSource] = useState('');
     const [selectedFile, setSelectedFile] = useState();
@@ -20,7 +26,10 @@ export default function Upload({
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
         previewFile(file);
+<<<<<<< HEAD
 
+=======
+>>>>>>> front-end-dev
         setFileInputState(e.target.value);
         setSelectedFile(file);
     };
@@ -137,6 +146,7 @@ export default function Upload({
                     }
                 }
                 />
+<<<<<<< HEAD
             )
         } <
         div className = "gallery" > {
@@ -158,5 +168,21 @@ export default function Upload({
         } <
         /div> <
         /div>
+=======
+            )}
+            <div className="gallery">
+                {imageIds &&
+                    imageIds.map((imageId, index) => (
+                        <Image
+                            key={index}
+                            cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
+                            publicId={imageId}
+                            width="300"
+                            crop="scale"
+                        />
+                    ))}
+            </div>
+        </div>
+>>>>>>> front-end-dev
     );
 }
