@@ -41,8 +41,7 @@ export default function ImageDetail() {
           <Image
               cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
               publicId={"bubba_test/"+albumId+'/'+imageId}
-              width="300"
-              height="300"
+              height="500"
               crop="scale"
           />
         </div>

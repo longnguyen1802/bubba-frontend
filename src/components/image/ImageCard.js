@@ -14,7 +14,7 @@ export default function ImageCard({key, publicId}) {
     navigate('/search/result/image/'+albumId+'/'+imageId)
 }
   return (
-    <Card sx={{ maxWidth: "186px", maxHeight: "186px", borderRadius: "20px"}}>
+    <Card sx={{ maxWidth: "186px", maxHeight: "186px", borderRadius: "20px", overflow: "hidden"}}>
       <CardActionArea onClick={() => {
         navigateImage(publicId);
       }} >
