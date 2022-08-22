@@ -19,11 +19,11 @@ export default function ImageDetail() {
             albumId: albumId
         }
     });
-    const data = await res.data;
-    setPhotographer(data.photographer);
+    //const data = await res.data;
+    setPhotographer(res.data.photographer);
     }
     loadPhotograher();
-  });
+  },[]);
   
   return (
     <>

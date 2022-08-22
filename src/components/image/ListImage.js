@@ -1,8 +1,13 @@
 import React from 'react'
-
-const ListImage = () => {
+import ImageCard from './ImageCard'
+const ListImage = ({listImage}) => {
   return (
-    <div>ListImage</div>
+    <div className='result-image-container'>
+      {listImage &&
+        listImage.slice(0,20).map((imageId, index) => (
+            <ImageCard key={index} publicId={imageId} />
+        ))}
+    </div>
   )
 }
 

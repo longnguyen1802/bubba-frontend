@@ -12,16 +12,18 @@ export function DataContextProvider({ children }) {
     const [listAlbumDate,setListAlbumDate] = useState([]);
     const [listAllAlbum,setListAllAlbum] = useState([]);
     const [faceImageId,setFaceImageId] = useState();
+    const [quota,setQuota] = useState();
   useEffect(() => {
     async function fetchData() {
         try{
-            const [resImage,resAlbum,resAllImage,resThumbnail,resInfo,resDate]= await Promise.all([
+            const [resImage,resAlbum,resAllImage,resThumbnail,resInfo,resDate,resLimit]= await Promise.all([
                 axios.get(URL+'/api/image',{mode:'cors'}),
                 axios.get(URL+'/api/album',{mode:'cors'}),
                 axios.get(URL+'/api/image/all',{mode:'cors'}),
                 axios.get(URL+'/api/album/thumbnail',{mode:'cors'}),
                 axios.get(URL+'/api/album/info',{mode:'cors'}),
                 axios.get(URL+'/api/album/date',{mode:'cors'}),
+                axios.get(URL+'/api/limit',{mode:'cors'}),
             ])
             setImageIds(arr =>[...arr,...resImage.data]);
             setListAlbum(resAlbum.data);
@@ -30,6 +32,7 @@ export function DataContextProvider({ children }) {
             setListAlbumThumbnail(resThumbnail.data);
             setListAlbumInfo(resInfo.data);
             setListAlbumDate(resDate.data);
+            setQuota(resLimit.data);
             //console.log(resThumbnail.data)
         } catch(err){
             try{
@@ -69,7 +72,8 @@ export function DataContextProvider({ children }) {
         faceImageId:faceImageId,
         setFaceImageId:setFaceImageId,
         listAlbumInfo:listAlbumInfo,
-        listAlbumDate:listAlbumDate
+        listAlbumDate:listAlbumDate,
+        quota:quota
       }}
     >
       {children}

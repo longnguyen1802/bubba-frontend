@@ -11,6 +11,8 @@ import ImageDetail from './pages/ImageDetail';
 import SearchResultAlbum from './pages/SearchResultAlbum';
 import {DataContextProvider} from './context/dataContext';
 import SearchResultFace from './pages/SearchResultFace';
+import Success from './pages/payment/Success';
+import Cancel from './pages/payment/Cancel';
 function App() {
     return (
       <>
@@ -25,6 +27,8 @@ function App() {
               <Route element={<SearchResultImage />} path="/search/result" />
               <Route element={<ImageDetail />} path="/search/result/image/:albumId/:id" />
               <Route element={<SearchResultAlbum />} path="/search/result/album" />
+              <Route element={<Success/>} path="/facesearch" />
+              <Route element={<Cancel/>} path="/payment/cancel"/>
               <Route element={<Home />} path="/" />
             </Routes>
           </DataContextProvider>

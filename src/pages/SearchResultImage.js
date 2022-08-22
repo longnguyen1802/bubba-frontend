@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useAPI } from '../context/dataContext';
 import FaceFilterBox from '../components/search/face/FaceFilterBox'
 import ImageCard from '../components/image/ImageCard';
-
+import ListImage from '../components/image/ListImage';
 export default function SearchResultImage() {
   const {currentImageId} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
@@ -33,15 +33,7 @@ export default function SearchResultImage() {
         </div>
        
       </div>
-      <div>
-          <div className="result-image-container">
-          {
-              currentImageId && currentImageId.map((imageId,index)=>(
-                <ImageCard key={index} publicId={imageId} />
-              ))
-          }
-          </div>
-      </div>
+      {currentImageId && <ListImage listImage={currentImageId} /> }
       <FaceFilterBox />
       {/* If out of quota */}
       <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
