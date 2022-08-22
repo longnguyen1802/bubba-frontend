@@ -4,7 +4,7 @@ const ListImage = ({listImage}) => {
   return (
     <div className='result-image-container'>
       {listImage &&
-        listImage.slice(0,20).map((imageId, index) => (
+        listImage.map((imageId, index) => (
             <ImageCard key={index} publicId={imageId} />
         ))}
     </div>
