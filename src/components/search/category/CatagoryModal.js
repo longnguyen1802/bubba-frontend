@@ -10,6 +10,13 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 export default function CatagoryModal({open, onClose}) {
 
   const [typeSelected, setTypeSelected] = useState(false)
+  const [sportData, setSportData] = useState(sportsType)
+  const initialState = sportsType
+  const handleSelect = (index) => {
+    let newState = [...sportData]
+    newState[index].state = !newState[index].state
+    setSportData(newState)
+  }
 
   if(!open) return null
 
@@ -27,8 +34,8 @@ export default function CatagoryModal({open, onClose}) {
       <div className='types'>
 
         {sportsType.map((text, index) => (
-          <div className='types-box' onClick={() => setTypeSelected(!typeSelected)}>
-            {typeSelected ? (<CheckCircleIcon className='check-icon' sx={{ fontSize: 30 }} />) : null }
+          <div className='types-box' onClick={() => handleSelect(index)}>
+            {sportData[index].state ? (<CheckCircleIcon className='check-icon' sx={{ fontSize: 30 }} />) : null }
               {text.icon}
             <span>{text.label}</span>
           </div>

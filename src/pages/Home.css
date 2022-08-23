@@ -298,6 +298,7 @@ h2 {
   flex-wrap: wrap;
   flex-direction: row;
   gap: 12px;
+  justify-content: center;
 }
 
 
