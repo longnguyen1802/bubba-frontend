@@ -21,9 +21,9 @@ export default function SearchResultFace() {
       <Link to='/search' className='search-bar'> 
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
-      <div className='filter-row'>
+
+      {/* <div className='filter-row'>
         
-        {/* if it is search with face filter show the below element, which should be showing the face client searching*/}
         <div className='face-icon'></div>
         
           <FilterTag />
@@ -34,7 +34,8 @@ export default function SearchResultFace() {
           </IconButton>
         </div>
        
-      </div>
+      </div> */}
+      
       <div>
           {/* <div className="result-image-container">
           {

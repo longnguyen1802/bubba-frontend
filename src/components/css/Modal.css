@@ -104,6 +104,10 @@
   align-items: center;
 }
 
+.message-modal .button-container {
+  justify-content: space-around;
+}
+
 .modal-text{
   text-align: center;
   margin: 0 38px 28px 38px;
@@ -249,4 +253,9 @@
 .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected {
   border-radius: 10px !important;
   background-color: #8239F8 !important;
+}
+
+.react-datepicker__month--selected, .react-datepicker__month--in-selecting-range, .react-datepicker__month--in-range, .react-datepicker__quarter--selected, .react-datepicker__quarter--in-selecting-range, .react-datepicker__quarter--in-range {
+  background-color: #8239F8 !important;
+  border-radius: 10px !important;
 }

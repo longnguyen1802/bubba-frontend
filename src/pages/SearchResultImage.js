@@ -21,7 +21,8 @@ export default function SearchResultImage() {
       <Link to='/search' className='search-bar'> 
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
-      <div className='filter-row'>
+
+      {/* <div className='filter-row'>
         
           <FilterTag />
 
@@ -31,7 +32,8 @@ export default function SearchResultImage() {
           </IconButton>
         </div>
        
-      </div>
+      </div> */}
+
       {currentImageId && <ListImage listImage={currentImageId} /> }
       <FaceFilterBox />
       {/* If out of quota */}
@@ -39,7 +41,8 @@ export default function SearchResultImage() {
         <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
       ):(
         null
-      )}    </div>
+      )}    
+      </div>
     </>
   )
 }

@@ -63,6 +63,10 @@ export default function FaceModal({open, onClose}) {
             <div className='modal-text'>
               Congratulations! You are awarded for {quota.limit} free facial recognition! Try it now & have a better search result!
             </div>
+            <div className='button-container'>
+              <button className='back-button button' onClick={onClose}  >Back</button> 
+              <button className='try-button button' id='try' onClick={() => setPreviewIsOpen(true)} >Try</button>
+            </div>
             </>
             :
             <>
@@ -72,12 +76,13 @@ export default function FaceModal({open, onClose}) {
               <div className='modal-text'>
                 Use {getNumberImage(listAlbum,imageIds)/10}$ HKD to find your image in remain {getNumberImage(listAlbum,imageIds)} image
               </div>
+              <div className='button-container'>
+                <button className='button go-button' onClick={() => setPreviewIsOpen(true)} >Go</button>
+              </div>
+
             </>
         }
-        <div className='button-container'>
-          <button className='back-button button' onClick={onClose}  >Back</button> 
-          <button className='try-button button' id='try' onClick={handleModal} >Try</button>
-        </div>
+        
       </div>
 
       <div className='try-face-modal' id='try-face-modal' 

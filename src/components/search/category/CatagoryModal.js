@@ -7,13 +7,14 @@ import { sportsType } from '../../staticData/SportsType';
 import { Link } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-export default function CatagoryModal({open, onClose}) {
+export default function CatagoryModal({open, onClose, selected}) {
 
   const [sportData, setSportData] = useState(sportsType)
   const initialState = sportsType
   const handleSelect = (index) => {
     let newState = [...sportData]
     newState[index].state = !newState[index].state
+    
     setSportData(newState)
   }
   const clearFilter = () =>{
@@ -24,6 +25,9 @@ export default function CatagoryModal({open, onClose}) {
     setSportData(newState);
 
   }
+
+  
+
   if(!open) return null
 
   return ReactDom.createPortal(
@@ -52,7 +56,7 @@ export default function CatagoryModal({open, onClose}) {
       <div className='button-container'>
         <Link to='/search/result' className='search-button button' >Search</Link>
         <button className='clear-button button' onClick={clearFilter} >Clear Filter</button> 
-        <button className='continue-button button'>Continue</button>
+        <button className='continue-button button' onClick={onClose}>Continue</button>
       </div>
       
     </div>

@@ -14,6 +14,8 @@ export default function Search() {
   const[FaceIsOpen, setFaceIsOpen] = useState(false)
   const[isAlbumSearch, setIsAlbumSearch] = useState(false)
   const[isImageSearch, setIsImageSearch] = useState(true)
+  const[selectedCatagory, setSelectedCatagory] = useState(false)
+  const[selectedDate, setSelectedDate] = useState(false)
 
   const handleSearchType = () => {
     setIsAlbumSearch(!isAlbumSearch)
@@ -40,7 +42,7 @@ export default function Search() {
           <span>Catagory</span>
         </div>
         {/* catagory filter popup */}
-        <CatagoryModal open={CatagoryIsOpen} onClose={() => setCatagoryIsOpen(false)} />
+        <CatagoryModal open={CatagoryIsOpen} onClose={() => setCatagoryIsOpen(false)} selected={() => setSelectedCatagory(true)}/>
 
         <div className='filter-box' onClick={() => setDateIsOpen(true)}>
           <CalendarMonthOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
@@ -63,8 +65,6 @@ export default function Search() {
       </div>
       <div className='button-container'>
         <Link to='/search/result' className='search-button button' >Search</Link>
-        <button className='clear-button button' >Clear Filter</button> 
-        <button className='continue-button button'>Continue</button>
       </div>
       
     </div>

@@ -13,6 +13,16 @@ import { useAPI } from '../../../context/dataContext';
 export default function DateModal({open, onClose,isAlbum}) {
   const {imageIds,setCurrentImageId,setListAlbum} = useAPI()
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+  const clearDate = () => {
+    setStartDate(null);
+    setEndDate(null);
+  }
   const navigate = useNavigate();
   if(!open) return null
   const handleSearch =async ()=>{
@@ -40,22 +50,24 @@ export default function DateModal({open, onClose,isAlbum}) {
       </div>
       <div className='date-container'>
         <DatePicker 
-          onChange={(date) => {
-            setStartDate(date);
-          }}
           dateFormat="MM/yyyy"
           showMonthYearPicker
           inline
           showFourColumnMonthYearPicker
           className='month-picker'
+          selected={startDate}
+          onChange={onChange}
+          startDate={startDate}
+          endDate={endDate}
+          selectsRange
         />
       </div>
 
       <div className='button-container'>
         {/* <Link to='/search/result'  className='search-button button' >Search</Link> */}
         <button className='search-button button' onClick={handleSearch}>Search</button> 
-        <button className='clear-button button' >Clear Filter</button> 
-        <button className='continue-button button'>Continue</button>
+        <button className='clear-button button' onClick={clearDate}>Clear Filter</button> 
+        <button className='continue-button button' onClick={onClose}>Continue</button>
       </div>
       
     </div>
