@@ -23,6 +23,7 @@ export default function ImageCard({key, publicId}) {
           cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
           publicId={publicId}
           crop="scale"
+          style={{ aspectRatio: 3/2 }}
           className='image-box'
         />
       </CardActionArea>

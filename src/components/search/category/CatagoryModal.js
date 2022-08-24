@@ -9,7 +9,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default function CatagoryModal({open, onClose}) {
 
-  const [typeSelected, setTypeSelected] = useState(false)
   const [sportData, setSportData] = useState(sportsType)
   const initialState = sportsType
   const handleSelect = (index) => {

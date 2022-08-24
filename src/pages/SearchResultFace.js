@@ -10,6 +10,8 @@ import FaceFilterBox from '../components/search/face/FaceFilterBox';
 import ImageCard from '../components/image/ImageCard';
 
 export default function SearchResultFace() {
+  const [quotaState, setQuotaState] = useState(false)
+
   const {faceImageId} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
   return (
@@ -44,8 +46,11 @@ export default function SearchResultFace() {
       </div>
       <FaceFilterBox />
       {/* If out of quota */}
-      <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
-    </div>
+      {quotaState ? (
+        <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
+      ):(
+        null
+      )}    </div>
     </>
   )
 }

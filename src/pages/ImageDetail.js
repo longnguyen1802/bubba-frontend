@@ -41,13 +41,9 @@ export default function ImageDetail() {
           <Image
               cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
               publicId={"bubba_test/"+albumId+'/'+imageId}
-              height="500"
               crop="scale"
+              className="image-detail-result"
           />
-        </div>
-        <div className='face-search-box'>
-          <span>Click and search the face:</span>
-          <div className='face-icon'></div>
         </div>
       </div>
     </>

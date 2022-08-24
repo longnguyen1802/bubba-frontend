@@ -18,7 +18,7 @@ export default function AlertModal({open, onClose}) {
             <p>Out of Quota!!!</p>
           </div>
           <div className='modal-text'>
-            Find Your Photos in the remaining 1464 for HKD 146.4.          </div>
+            Find Your Photos in the remaining 1464 for HKD 146.4.</div>
           <div className='button-container'>
             <button className='button go-button'>Go</button>
           </div>
