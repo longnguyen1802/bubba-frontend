@@ -10,14 +10,10 @@ import FaceFilterBox from '../components/search/face/FaceFilterBox';
 import ImageCard from '../components/image/ImageCard';
 import {getNumberImage} from '../util/filter/filter.js';
 export default function SearchResultFace() {
-<<<<<<< HEAD
-  const {faceImageId,listAlbum,imageIds} = useAPI()
-  //console.log(faceImageId);
-=======
+
   const [quotaState, setQuotaState] = useState(false)
 
   const {faceImageId} = useAPI()
->>>>>>> remotes/origin/front-end-dev
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
   const numImage = getNumberImage(listAlbum,imageIds);
   const listImage = faceImageId?.listImage;
