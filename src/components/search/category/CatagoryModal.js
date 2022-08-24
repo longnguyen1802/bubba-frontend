@@ -16,7 +16,14 @@ export default function CatagoryModal({open, onClose}) {
     newState[index].state = !newState[index].state
     setSportData(newState)
   }
+  const clearFilter = () =>{
+    let newState = [...sportData]
+    for(let i=0;i<newState.length;i++){
+      newState[i].state = false;
+    }
+    setSportData(newState);
 
+  }
   if(!open) return null
 
   return ReactDom.createPortal(
@@ -44,7 +51,7 @@ export default function CatagoryModal({open, onClose}) {
       </div>
       <div className='button-container'>
         <Link to='/search/result' className='search-button button' >Search</Link>
-        <button className='clear-button button' >Clear Filter</button> 
+        <button className='clear-button button' onClick={clearFilter} >Clear Filter</button> 
         <button className='continue-button button'>Continue</button>
       </div>
       
