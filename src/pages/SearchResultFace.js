@@ -36,12 +36,43 @@ export default function SearchResultFace() {
        
       </div>
       <div>
-          <div className="result-image-container">
+          {/* <div className="result-image-container">
           {
               faceImageId && faceImageId.map((imageId,index)=>(
                 <ImageCard key={index} publicId={imageId} />
               ))
           }
+          </div> */}
+          <div className='with-face'>
+            <h4>Photos with your face!</h4>
+            <div className="result-image-container">
+            {
+                faceImageId && faceImageId.map((imageId,index)=>(
+                  <ImageCard key={index} publicId={imageId} />
+                ))
+            }
+            </div>
+          </div>
+          <div className='without-face'>
+            <h4>Photos without your face.</h4>
+            <div className="result-image-container">
+            {
+                faceImageId && faceImageId.map((imageId,index)=>(
+                  <ImageCard key={index} publicId={imageId} />
+                ))
+            }
+            </div>
+          </div>
+
+          <div className='not-yet-search'>
+            <h4>Photos maybe with your face?</h4>
+            <div className="result-image-container">
+            {
+                faceImageId && faceImageId.map((imageId,index)=>(
+                  <ImageCard key={index} publicId={imageId} />
+                ))
+            }
+            </div>
           </div>
       </div>
       <FaceFilterBox />
@@ -50,7 +81,8 @@ export default function SearchResultFace() {
         <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
       ):(
         null
-      )}    </div>
+      )}    
+      </div>
     </>
   )
 }
