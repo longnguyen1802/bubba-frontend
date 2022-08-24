@@ -13,6 +13,8 @@ import ListImage from '../components/image/ListImage';
 export default function SearchResultImage() {
   const {currentImageId,imageIds,listAlbum} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
+  const [quotaState, setQuotaState] = useState(false)
+
   return (
     <>
     <div className='homepage-container'>
@@ -21,9 +23,6 @@ export default function SearchResultImage() {
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
       <div className='filter-row'>
-        
-        {/* if it is search with face filter show the below element, which should be showing the face client searching*/}
-        <div className='face-icon'></div>
         
           <FilterTag />
 
@@ -37,8 +36,12 @@ export default function SearchResultImage() {
       {currentImageId && <ListImage listImage={currentImageId} /> }
       <FaceFilterBox />
       {/* If out of quota */}
-      {/* <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false) }/> */}
-    </div>
+
+      {quotaState ? (
+        <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
+      ):(
+        null
+      )}    </div>
     </>
   )
 }

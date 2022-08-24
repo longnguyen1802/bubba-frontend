@@ -5,6 +5,7 @@ import { IconButton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useAPI } from '../context/dataContext';
 import ListAlbum from '../components/album/ListAlbum';
+import FaceFilterBox from '../components/search/face/FaceFilterBox';
 
 export default function SearchResultAlbum() {
   const {listAlbum,listAlbumThumbnail,listAlbumInfo,listAlbumDate} = useAPI()
@@ -38,6 +39,7 @@ export default function SearchResultAlbum() {
         </div>
         <ListAlbum listAlbumThumbnail={actualAlbumThumbnail} listAllAlbum={listAlbum} 
                     navigateAlbum={navigateAlbum} listAlbumDate={actualAlbumDate} listAlbumInfo={actualAlbumInfo}/>
+        <FaceFilterBox />
       </div>
     </>
   )

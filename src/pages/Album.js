@@ -9,6 +9,8 @@ import ImageCard from '../components/image/ImageCard.js';
 import { useAPI } from '../context/dataContext.js';
 import ListImage from '../components/image/ListImage.js'
 export default function Album() {
+
+    const [quotaState, setQuotaState] = useState(false)
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const[AlertIsOpen, setAlertIsOpen] = useState(false)
@@ -29,7 +31,11 @@ export default function Album() {
               <ListImage listImage={listImage}/>
               <FaceFilterBox />
               {/* If out of quota */}
-              <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
+              {quotaState ? (
+                <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
+              ):(
+                null
+              )}
             </div>
         </div>
     );
