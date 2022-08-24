@@ -14,30 +14,30 @@ export default function FaceModal({open, onClose}) {
   const[PreviewIsOpen, setPreviewIsOpen] = useState(false)
   const {quota,listAlbum,imageIds}= useAPI();
   const handleModal =async () => {
-    if(quota.limit>0)
-    {
+    // if(quota.limit>0)
+    // {
       setIsActive(true);
-    } else{
-      const value = localStorage.getItem("listAlbumBefore");
-      if(value!==undefined){
-        localStorage.removeItem("listAlbumBefore");
-      }
-      localStorage.setItem("listAlbumBefore",listAlbum);
-      const resp = await axios({
-        method: 'post',
-        url: URL+'/api/payment/create-checkout-session',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          items: [{
-              id: 1,
-              quantity: getNumberImage(listAlbum,imageIds)
-          } ],
-        }
-      })
-      window.location.replace(resp.data.url);
-  }
+  //   } else{
+  //     const value = localStorage.getItem("listAlbumBefore");
+  //     if(value!==undefined){
+  //       localStorage.removeItem("listAlbumBefore");
+  //     }
+  //     localStorage.setItem("listAlbumBefore",listAlbum);
+  //     const resp = await axios({
+  //       method: 'post',
+  //       url: URL+'/api/payment/create-checkout-session',
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       data: {
+  //         items: [{
+  //             id: 1,
+  //             quantity: getNumberImage(listAlbum,imageIds)
+  //         } ],
+  //       }
+  //     })
+  //     window.location.replace(resp.data.url);
+  // }
     
   };
   if(!open) return null
@@ -70,7 +70,7 @@ export default function FaceModal({open, onClose}) {
                 <p>Out of quota</p>
               </div>
               <div className='modal-text'>
-                Use {getNumberImage(listAlbum,imageIds)/10}$ HKD to find your image in remain {getNumberImage(listAlbum,imageIds)} image
+                You has 0 quota left upload your image to search
               </div>
             </>
         }

@@ -8,20 +8,25 @@ import { useState } from 'react';
 import { useAPI } from '../context/dataContext';
 import FaceFilterBox from '../components/search/face/FaceFilterBox';
 import ImageCard from '../components/image/ImageCard';
-
+import {getNumberImage} from '../util/filter/filter.js';
 export default function SearchResultFace() {
-  const {faceImageId} = useAPI()
+  const {faceImageId,listAlbum,imageIds} = useAPI()
+  //console.log(faceImageId);
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
+  const numImage = getNumberImage(listAlbum,imageIds);
+  const listImage = faceImageId?.listImage;
+  if(!faceImageId?.imageId){
+    return <></>
+  }
   return (
     <>
     <div className='homepage-container'>
-      <h2 className='search-result-title'> {faceImageId && faceImageId.length} results are found</h2>
+      <h2 className='search-result-title'> {listImage && listImage.length} results are found</h2>
       <Link to='/search' className='search-bar'> 
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
       <div className='filter-row'>
         
-        {/* if it is search with face filter show the below element, which should be showing the face client searching*/}
         <div className='face-icon'></div>
         
           <FilterTag />
@@ -36,15 +41,14 @@ export default function SearchResultFace() {
       <div>
           <div className="result-image-container">
           {
-              faceImageId && faceImageId.map((imageId,index)=>(
+              faceImageId && listImage.map((imageId,index)=>(
                 <ImageCard key={index} publicId={imageId} />
               ))
           }
           </div>
       </div>
       <FaceFilterBox />
-      {/* If out of quota */}
-      <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
+      <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} numberImages={numImage-100} searchImageId={faceImageId.imageId}/>
     </div>
     </>
   )
