@@ -6,11 +6,12 @@ import AddIcon from '@mui/icons-material/Add';
 import AlertModal from '../components/notify/AlertModal';
 import { useState } from 'react';
 import { useAPI } from '../context/dataContext';
+
 import FaceFilterBox from '../components/search/face/FaceFilterBox'
 import ImageCard from '../components/image/ImageCard';
 import ListImage from '../components/image/ListImage';
 export default function SearchResultImage() {
-  const {currentImageId} = useAPI()
+  const {currentImageId,imageIds,listAlbum} = useAPI()
   const[AlertIsOpen, setAlertIsOpen] = useState(true)
   const [quotaState, setQuotaState] = useState(false)
 
@@ -37,6 +38,7 @@ export default function SearchResultImage() {
       {currentImageId && <ListImage listImage={currentImageId} /> }
       <FaceFilterBox />
       {/* If out of quota */}
+
       {quotaState ? (
         <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} />
       ):(

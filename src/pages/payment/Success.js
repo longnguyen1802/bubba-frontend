@@ -4,41 +4,59 @@ import PreviewModal from '../../components/search/face/PreviewModal';
 import { useAPI } from '../../context/dataContext';
 import { URL } from '../../components/util/constant';
 import axios from 'axios';
+import ListImage from '../../components/image/ListImage';
 const Success = () => {
-  const {setListAlbum}  = useAPI();
-  const [quota,setQuota] = useState();
+  const {setListAlbum,setFaceImageId}  = useAPI();
+  const [resultFace,setResultFace] = useState();
   const [valid,setValid] = useState();
   function useQuery() {
     const { search } = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
   }
   const listAlbum = localStorage.getItem("listAlbumBefore");
+  const faceSearchId = localStorage.getItem("faceImageSearchBefore")
   const result = listAlbum.split(',');
+  const quota  =parseInt(localStorage.getItem("quotaSearchBefore"))
   const query = useQuery();
-  useEffect(() => {
-    const setListAlbumAgain = async () => {
-      try{
-        const resp = await axios({
-          method: 'post',
-          url: URL+'/api/payment/getSessionInfo',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: {
-            session_id : query.get("session_id")
+  useEffect(()=>{
+    const handleSearchSpecial = async () => {
+      try {
+          const response = await fetch(URL+'/api/image/findSpecial', {
+              mode:'cors',
+              method: 'POST',
+              body: JSON.stringify({ 
+                  listFolder: result,
+                  quota:quota ,
+                  publicId:faceSearchId}),
+              headers: { 'Content-Type': 'application/json' },
+          });
+          setResultFace(await response.json());
+      } catch (err) {
+          try{
+            const response = await fetch(URL+'/api/image/findSpecial', {
+              mode:'cors',
+              method: 'POST',
+              body: JSON.stringify({ 
+                  listFolder: result,
+                  quota:quota ,
+                  publicId:faceSearchId}),
+              headers: { 'Content-Type': 'application/json' },
+          });
+          setResultFace(await response.json());
           }
-        })
-        setQuota(resp.data.quota);
-        setValid(true);
-      } catch(err){
-        setValid(false);
+          catch(err){
+              console.error(err);
+          }
       }
-    }
-    setListAlbumAgain()
-  }, []);
+  };
+  handleSearchSpecial();
+  },[]);
+  
   return (
-      <>
-      { valid && valid === true ? <PreviewModal open={true} quota={quota} special={true} listRealAlbum = {result}/> : <h1>Invalid Payment</h1> }  
+    resultFace&&
+     <>
+      <h1>There is {resultFace.length} Image</h1>
+      <ListImage listImage={resultFace}/>
       </>
   )
 }

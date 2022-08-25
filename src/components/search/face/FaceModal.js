@@ -12,33 +12,17 @@ import { URL } from '../../util/constant';
 export default function FaceModal({open, onClose}) {
   const [isActive, setIsActive] = useState(false);
   const[PreviewIsOpen, setPreviewIsOpen] = useState(false)
-  const {quota,listAlbum,imageIds}= useAPI();
+  const [quota,setQuotaState] = useState();
+  const {listAlbum,imageIds}= useAPI();
+  useEffect(() => {
+    const getQuota = async () =>{
+      const resLimit = await axios.get(URL+'/api/limit',{mode:'cors'});
+      setQuotaState(resLimit.data);
+    }
+    getQuota();
+  }, []);
   const handleModal =async () => {
-    if(quota.limit>0)
-    {
       setIsActive(true);
-    } else{
-      const value = localStorage.getItem("listAlbumBefore");
-      if(value!==undefined){
-        localStorage.removeItem("listAlbumBefore");
-      }
-      localStorage.setItem("listAlbumBefore",listAlbum);
-      const resp = await axios({
-        method: 'post',
-        url: URL+'/api/payment/create-checkout-session',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          items: [{
-              id: 1,
-              quantity: getNumberImage(listAlbum,imageIds)
-          } ],
-        }
-      })
-      window.location.replace(resp.data.url);
-  }
-    
   };
   if(!open) return null
 
@@ -74,7 +58,7 @@ export default function FaceModal({open, onClose}) {
                 <p>Out of quota</p>
               </div>
               <div className='modal-text'>
-                Use {getNumberImage(listAlbum,imageIds)/10}$ HKD to find your image in remain {getNumberImage(listAlbum,imageIds)} image
+                You has 0 quota left upload your image to search
               </div>
               <div className='button-container'>
                 <button className='button go-button' onClick={() => setPreviewIsOpen(true)} >Go</button>
@@ -101,7 +85,7 @@ export default function FaceModal({open, onClose}) {
             <div className='icon-box'></div>
             <span>Gallery</span>
           </div>
-          <PreviewModal open={PreviewIsOpen} onClose={() => setPreviewIsOpen(false) } quota={quota.limit} special={false}/>
+          <PreviewModal open={PreviewIsOpen} onClose={() => setPreviewIsOpen(false) } quota={quota.limit} />
 
         </div>
         <div className='divider' />
