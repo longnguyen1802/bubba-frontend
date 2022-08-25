@@ -4,7 +4,7 @@ import PreviewModal from '../../components/search/face/PreviewModal';
 import { useAPI } from '../../context/dataContext';
 import { URL } from '../../components/util/constant';
 import axios from 'axios';
-import loadingSvg from '../../Loading.svg'
+import loadingSvg from '../../logo.svg'
 import LoadingIcons from 'react-loading-icons'
 
 const SuccessState = () => {

@@ -2,6 +2,16 @@ import axios from 'axios';
 import {
     URL
 } from '../../components/util/constant';
+export const getRemaining = (listImage, listAlbum, imageIds) => {
+    if (!listImage)
+        return []
+    const listImages = imageIds
+        .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
+        .map((e) => e.files)
+        .flat();
+    const notFound = listImages.filter(e => !listImage.includes(e));
+    return notFound
+}
 export const getNotContainFace = (listImage, listAlbum, imageIds) => {
     if (!listImage)
         return []

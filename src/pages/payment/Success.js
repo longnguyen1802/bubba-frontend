@@ -5,10 +5,14 @@ import { useAPI } from '../../context/dataContext';
 import { URL } from '../../components/util/constant';
 import axios from 'axios';
 import ListImage from '../../components/image/ListImage';
+import LoadingIcons from 'react-loading-icons'
+import { getRemaining } from '../../util/filter/filter';
 const Success = () => {
-  const {setListAlbum,setFaceImageId}  = useAPI();
+  const {setListAlbum,setFaceImageId,imageIds}  = useAPI();
   const [resultFace,setResultFace] = useState();
   const [valid,setValid] = useState();
+  const [success,setSuccess] = useState(false);
+  const [remainingImage,setRemainingImage] = useState();
   function useQuery() {
     const { search } = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
@@ -18,6 +22,7 @@ const Success = () => {
   const result = listAlbum.split(',');
   const quota  =parseInt(localStorage.getItem("quotaSearchBefore"))
   const query = useQuery();
+  
   useEffect(()=>{
     const handleSearchSpecial = async () => {
       try {
@@ -27,10 +32,17 @@ const Success = () => {
               body: JSON.stringify({ 
                   listFolder: result,
                   quota:quota ,
-                  publicId:faceSearchId}),
+                  publicId:faceSearchId,
+                  noQuota:"yes"
+                }),
               headers: { 'Content-Type': 'application/json' },
           });
-          setResultFace(await response.json());
+          const resImage = await axios.get(URL+'/api/image',{mode:'cors'});
+          const resultResponse = await response.json()
+          setResultFace(resultResponse);
+          const listRemaining = getRemaining(resultResponse,listAlbum.split(','),resImage.data);
+          setRemainingImage(listRemaining);
+          setSuccess(true);
       } catch (err) {
           try{
             const response = await fetch(URL+'/api/image/findSpecial', {
@@ -39,10 +51,17 @@ const Success = () => {
               body: JSON.stringify({ 
                   listFolder: result,
                   quota:quota ,
-                  publicId:faceSearchId}),
+                  publicId:faceSearchId,
+                  noQuota:"yes"
+                }),
               headers: { 'Content-Type': 'application/json' },
           });
-          setResultFace(await response.json());
+          const resImage = await axios.get(URL+'/api/image',{mode:'cors'});
+          const resultResponse = await response.json()
+          setResultFace(resultResponse);
+          const listRemaining = getRemaining(resultResponse,listAlbum.split(','),resImage.data);
+          setRemainingImage(listRemaining);
+          setSuccess(true);
           }
           catch(err){
               console.error(err);
@@ -53,13 +72,27 @@ const Success = () => {
   },[]);
   
   return (
-    resultFace&&
-     <>
-     <div className='homepage-container'>
-        <h1>There is {resultFace.length} Image</h1>
-        <ListImage listImage={resultFace}/>
-     </div>
-      
+    <>
+    {
+      success 
+        ? 
+          resultFace&&
+          <>
+          <div className='homepage-container'>
+              <h1>There is {resultFace.length} Image</h1>
+              <ListImage listImage={resultFace}/>
+          </div>
+          <div className='without-face'>
+            <h4>Here is {remainingImage.length} images without your face</h4>
+            <ListImage listImage={remainingImage}/>
+          </div>
+          </>
+        :
+        <div className='loading-container'>
+          <LoadingIcons.ThreeDots fill="#4D258E"/>
+          <h2>LOADING</h2>
+        </div>  
+  }
     </>
   )
 }

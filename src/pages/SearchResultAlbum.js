@@ -6,9 +6,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { useAPI } from '../context/dataContext';
 import ListAlbum from '../components/album/ListAlbum';
 import FaceFilterBox from '../components/search/face/FaceFilterBox';
-
+import { getNumberImage } from '../util/filter/filter';
 export default function SearchResultAlbum() {
-  const {listAlbum,listAlbumThumbnail,listAlbumInfo,listAlbumDate} = useAPI()
+  const {listAlbum,listAlbumThumbnail,listAlbumInfo,listAlbumDate,imageIds} = useAPI()
   const navigate = useNavigate();
   const navigateAlbum = (albumId) =>{
     navigate('/album/'+albumId);
@@ -21,11 +21,13 @@ export default function SearchResultAlbum() {
                                 .map(e=>e.description);
   const actualAlbumDate = listAlbumDate
                                 .filter((e)=>(listAlbum.some(elem => (elem.toLowerCase() === e.albumId.toLowerCase()))))
-                                .map(e=>e.date);                       
+                                .map(e=>e.date);
+  const numberImage = getNumberImage(listAlbum,imageIds);                 
   return (
     <>
       <div className='homepage-container'>
         <h1 className="home-title">{actualAlbumThumbnail.length} results are found</h1>
+        <h1> There is total {numberImage} images</h1>
         <Link to='/search' className='search-bar'> 
           <input className='search-field' type="text" placeholder="(User input text)"></input>
         </Link>

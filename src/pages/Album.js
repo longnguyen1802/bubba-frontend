@@ -28,6 +28,7 @@ export default function Album() {
                 </IconButton>
                 <h2>Album {id}</h2>
               </div>
+              <h1>There is {listImage.length} images</h1>
               <ListImage listImage={listImage}/>
               <FaceFilterBox />
               {/* If out of quota */}

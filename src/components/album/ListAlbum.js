@@ -8,6 +8,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { convertDate } from '../../util/filter/convert';
 const ListAlbum = ({listAlbumThumbnail,listAllAlbum,navigateAlbum,listAlbumInfo,listAlbumDate}) => {
   return (
     <div className='album-container'>      
@@ -38,7 +39,7 @@ const ListAlbum = ({listAlbumThumbnail,listAllAlbum,navigateAlbum,listAlbumInfo,
                         {listAlbumInfo[index]}
                     </Typography>
                     <Typography variant="body3" color="text.secondary">
-                        {listAlbumDate[index]}
+                        {convertDate(listAlbumDate[index])}
                     </Typography>
                     </CardContent>
                 </CardActionArea>
