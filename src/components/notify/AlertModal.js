@@ -9,13 +9,17 @@ import axios from 'axios';
 import { URL } from '../util/constant';
 // Set numberImages = []
 // searchImageId = ""
-export default function AlertModal({open, onClose,numberImages,searchImageId}) {
+export default function AlertModal({open, onClose,numberImages,searchImageId,isQuota}) {
   const {listAlbum}  = useAPI();
   if(!open) return null
   const handleModal =async () => {
+      const noQuota = localStorage.getItem("noQuotaBefore");
       const ListAlbumValue = localStorage.getItem("listAlbumBefore");
       const faceIdImageValue = localStorage.getItem("faceImageSearchBefore");
       const quotaValue =  localStorage.getItem("quotaSearchBefore");
+      if(noQuota!==undefined){
+        localStorage.removeItem("noQuotaBefore");
+      }
       if(ListAlbumValue!==undefined){
         localStorage.removeItem("listAlbumBefore");
       }
@@ -24,6 +28,12 @@ export default function AlertModal({open, onClose,numberImages,searchImageId}) {
       }
       if(quotaValue!==undefined){
         localStorage.removeItem("quotaSearchBefore");
+      }
+      if(isQuota){
+        localStorage.setItem("noQuotaBefore","yes");
+      }
+      else{
+        localStorage.setItem("noQuotaBefore","no");
       }
       localStorage.setItem("listAlbumBefore",listAlbum);
       localStorage.setItem("faceImageSearchBefore",searchImageId);

@@ -171,7 +171,7 @@ export default function PreviewModal({open, onClose,quota}) {
                           <button className="search-button-form button" type="submit" onClick={handleSearchSpecial}>
                               Search
                           </button>
-                          <AlertModal open={alertOpen} onClose={() => setAlertOpen(false)} numberImages={numImage} searchImageId={imageId}/>
+                          <AlertModal open={alertOpen} onClose={() => setAlertOpen(false)} numberImages={numImage} searchImageId={imageId} isQuota={false}/>
                         </>            
                         :
                         // Done 

@@ -11,6 +11,7 @@ import ImageCard from '../components/image/ImageCard';
 import {getNumberImage,getNotContainFace,getNotSearch} from '../util/filter/filter.js';
 import { URL } from '../components/util/constant';
 import axios from 'axios';
+import FaceFilterBoxSpecial from '../components/search/face/FaceFilterBoxSpecial';
 export default function SearchResultFace() {
 
   const [quotaState, setQuotaState] = useState(false)
@@ -71,11 +72,11 @@ export default function SearchResultFace() {
             </div>
           </div>
       </div>
-      <FaceFilterBox />
+      <FaceFilterBoxSpecial clickFunction={setAlertIsOpen} />
 
       {/* If out of quota */}
       {quotaState ? (
-        <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} numberImages={numImage-100} searchImageId={faceImageId.imageId}/>
+        <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} numberImages={numImage-100} searchImageId={faceImageId.imageId} isQuota={true}/>
       ):(
         null
       )}    

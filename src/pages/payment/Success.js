@@ -21,6 +21,7 @@ const Success = () => {
   const faceSearchId = localStorage.getItem("faceImageSearchBefore")
   const result = listAlbum.split(',');
   const quota  =parseInt(localStorage.getItem("quotaSearchBefore"))
+  const noQuota = localStorage.getItem("noQuotaBefore")
   const query = useQuery();
   
   useEffect(()=>{
@@ -33,7 +34,7 @@ const Success = () => {
                   listFolder: result,
                   quota:quota ,
                   publicId:faceSearchId,
-                  noQuota:"yes"
+                  noQuota:noQuota
                 }),
               headers: { 'Content-Type': 'application/json' },
           });
@@ -52,7 +53,7 @@ const Success = () => {
                   listFolder: result,
                   quota:quota ,
                   publicId:faceSearchId,
-                  noQuota:"yes"
+                  noQuota:noQuota
                 }),
               headers: { 'Content-Type': 'application/json' },
           });
