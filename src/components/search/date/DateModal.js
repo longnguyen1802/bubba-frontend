@@ -13,7 +13,7 @@ import { useAPI } from '../../../context/dataContext';
 export default function DateModal({open, onClose,isAlbum}) {
   const {imageIds,setCurrentImageId,setListAlbum} = useAPI()
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(new Date());
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -24,10 +24,12 @@ export default function DateModal({open, onClose,isAlbum}) {
     setEndDate(null);
   }
   const navigate = useNavigate();
+  
   if(!open) return null
   const handleSearch =async ()=>{
-    const date = `${startDate.getMonth()+1}/${startDate.getFullYear()}`;
-    await dateFilter(date,setListAlbum,setCurrentImageId,imageIds);
+    const startDates = `${startDate.getFullYear()}-${startDate.getMonth()+1}-01`;
+    const endDates = `${endDate.getFullYear()}-${endDate.getMonth()+1}-28`;
+    await dateFilter(startDates,endDates,setListAlbum,setCurrentImageId,imageIds);
     if(!isAlbum)
     {
       navigate('/search/result');

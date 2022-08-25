@@ -8,6 +8,7 @@ import { useAPI } from '../../../context/dataContext';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../../notify/AlertModal';
 import { getNumberImage } from '../../../util/filter/filter';
+import SelectInput from '@mui/material/Select/SelectInput';
 export default function PreviewModal({open, onClose,quota}) {
   const navigate = useNavigate();
   const {listAlbum,setFaceImageId,imageIds} = useAPI();
@@ -55,7 +56,8 @@ export default function PreviewModal({open, onClose,quota}) {
               setFileInputState('');
               setPreviewSource('');
               setAlertOpen(true);
-              
+              // End in here
+            
           } catch (err) {
               try{
                 const response = await fetch(URL+'/api/image/uploadSearch', {
@@ -164,10 +166,12 @@ export default function PreviewModal({open, onClose,quota}) {
                     />
                 </label>
                 { quota===0 ? 
+                        // Help to handle
                         <button className="search-button-form button" type="submit" onClick={handleSearchSpecial}>
                             Search
                         </button>
                         :
+                        // Done 
                         <button className="search-button-form button" type="submit" onClick={handleSearch}>
                             {search? "Search inprogress" : "Search"}
                         </button>

@@ -8,7 +8,7 @@ import { useState ,useEffect} from 'react';
 import { useAPI } from '../context/dataContext';
 import FaceFilterBox from '../components/search/face/FaceFilterBox';
 import ImageCard from '../components/image/ImageCard';
-import {getNumberImage} from '../util/filter/filter.js';
+import {getNumberImage,getNotContainFace,getNotSearch} from '../util/filter/filter.js';
 import { URL } from '../components/util/constant';
 import axios from 'axios';
 export default function SearchResultFace() {
@@ -29,6 +29,8 @@ export default function SearchResultFace() {
   if(!faceImageId?.imageId){
     return <></>
   }
+  const listNotFound  = getNotContainFace(listImage,listAlbum,imageIds);
+  const listNotSearch = getNotSearch(listAlbum,imageIds);
   return (
     <>
     <div className='homepage-container'>
@@ -36,21 +38,6 @@ export default function SearchResultFace() {
       <Link to='/search' className='search-bar'> 
         <input className='search-field' type="text" placeholder="(User input Text)"></input>
       </Link>
-
-      {/* <div className='filter-row'>
-        
-        <div className='face-icon'></div>
-        
-          <FilterTag />
-
-        <div className='add-icon'>
-          <IconButton >
-            <AddIcon />
-          </IconButton>
-        </div>
-       
-      </div> */}
-      
       <div>
           <div className='with-face'>
             <h4>Photos with your face!</h4>
@@ -66,7 +53,7 @@ export default function SearchResultFace() {
             <h4>Photos without your face.</h4>
             <div className="result-image-container">
             {
-                listImage && listImage.map((imageId,index)=>(
+                listNotFound && listNotFound.map((imageId,index)=>(
                   <ImageCard key={index} publicId={imageId} />
                 ))
             }
@@ -77,7 +64,7 @@ export default function SearchResultFace() {
             <h4>Photos maybe with your face?</h4>
             <div className="result-image-container">
             {
-                listImage && listImage.map((imageId,index)=>(
+                listNotSearch && listNotSearch.map((imageId,index)=>(
                   <ImageCard key={index} publicId={imageId} />
                 ))
             }

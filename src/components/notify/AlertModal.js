@@ -7,6 +7,8 @@ import { useAPI } from '../../context/dataContext';
 import { getNumberImage } from '../../util/filter/filter';
 import axios from 'axios';
 import { URL } from '../util/constant';
+// Set numberImages = []
+// searchImageId = ""
 export default function AlertModal({open, onClose,numberImages,searchImageId}) {
   const {listAlbum}  = useAPI();
   if(!open) return null
