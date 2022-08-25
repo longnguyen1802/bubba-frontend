@@ -45,6 +45,7 @@ export default function AlertModal({open, onClose,numberImages,searchImageId}) {
   };
   return ReactDom.createPortal (
     <>
+    <div className='overlay alert-overlay' />
     <div className='alert-modal-quota modal'>
       <div className='message-modal' >
         <IconButton onClick={onClose} className='close'>

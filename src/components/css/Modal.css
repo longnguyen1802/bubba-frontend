@@ -36,6 +36,10 @@
   z-index: 2;
 }
 
+.alert-overlay {
+  z-index: 3;
+}
+
 .divider {
   width: 66px;
   border: 2px solid #D9D9D9;
@@ -180,6 +184,7 @@
 
 .alert-modal-quota{
   height: 30%;
+  z-index: 4;
 }
 
 .form {

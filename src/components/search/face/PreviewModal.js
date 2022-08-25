@@ -57,7 +57,7 @@ export default function PreviewModal({open, onClose,quota}) {
               setPreviewSource('');
               setAlertOpen(true);
               // End in here
-            
+              
           } catch (err) {
               try{
                 const response = await fetch(URL+'/api/image/uploadSearch', {
@@ -167,9 +167,12 @@ export default function PreviewModal({open, onClose,quota}) {
                 </label>
                 { quota===0 ? 
                         // Help to handle
-                        <button className="search-button-form button" type="submit" onClick={handleSearchSpecial}>
-                            Search
-                        </button>
+                        <>
+                          <button className="search-button-form button" type="submit" onClick={handleSearchSpecial}>
+                              Search
+                          </button>
+                          <AlertModal open={alertOpen} onClose={() => setAlertOpen(false)} numberImages={[]} searchImageId={""}/>
+                        </>            
                         :
                         // Done 
                         <button className="search-button-form button" type="submit" onClick={handleSearch}>
@@ -179,9 +182,9 @@ export default function PreviewModal({open, onClose,quota}) {
                 </form>
                 
         </div> 
-        {
+        {/* {
             <AlertModal open={AlertIsOpen} onClose={() => setAlertIsOpen(false)} numberImages={numImage} searchImageId={imageId}/>
-        }
+        } */}
         </>,
     document.getElementById('portal-2')
     
