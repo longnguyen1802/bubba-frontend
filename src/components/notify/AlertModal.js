@@ -8,7 +8,7 @@ import { getNumberImage } from '../../util/filter/filter';
 import axios from 'axios';
 import { URL } from '../util/constant';
 export default function AlertModal({open, onClose,numberImages,searchImageId}) {
-  const {listAlbum,imageIds}  = useAPI();
+  const {listAlbum}  = useAPI();
   if(!open) return null
   const handleModal =async () => {
       const ListAlbumValue = localStorage.getItem("listAlbumBefore");
