@@ -148,3 +148,117 @@ img {
   grid-gap: 2rem;
   justify-content: center;
 } */
+.Frame_15 {
+	transform-box: fill-box;
+	transform-origin: 50% 50%
+}
+.Ellipse_12 {
+	animation: 1s linear 0s 1 normal forwards running Ellipse_12;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
+}
+@keyframes Ellipse_12 {
+	0% {
+		transform: translateY(0px) translateX(0px);
+		width: 12px;
+		height: 12px;
+	}
+	10% {
+		transform: translateY(-10px);
+	}
+	20% {
+		transform: translateY(-7px);
+	}
+	30% {
+		transform: translateY(10px);
+	}
+	40% {
+		transform: translateY(7px);
+	}
+	100% {
+		transform: translateY(0px) translateX(0px);
+		width: 12px;
+		height: 12px;
+	}
+}
+.Ellipse_13 {
+	animation: 1s linear 0s 1 normal forwards running Ellipse_13;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
+}
+@keyframes Ellipse_13 {
+	0% {
+		transform: translateY(0px) translateX(0px);
+		width: 12px;
+		height: 12px;
+	}
+	10% {
+		transform: translateY(0px);
+	}
+	20% {
+		transform: translateY(-10px);
+	}
+	30% {
+		transform: translateY(-7px);
+	}
+	40% {
+		transform: translateY(10px);
+	}
+	50% {
+		transform: translateY(7px);
+	}
+	100% {
+		transform: translateY(0px) translateX(0px);
+		width: 12px;
+		height: 12px;
+	}
+}
+.Ellipse_14 {
+	animation: 1s linear 0s 1 normal forwards running Ellipse_14;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
+}
+@keyframes Ellipse_14 {
+	0% {
+		transform: translateY(0px) translateX(0px);
+		width: 12px;
+		height: 12px;
+	}
+	30% {
+		transform: translateY(0px);
+	}
+	40% {
+		transform: translateY(-10px);
+	}
+	50% {
+		transform: translateY(-7px);
+	}
+	60% {
+		transform: translateY(10px);
+	}
+	70% {
+		transform: translateY(7px);
+	}
+	100% {
+		transform: translateY(0px) translateX(0px);
+		width: 12px;
+		height: 12px;
+	}
+}
+.loading {
+	animation: 1s linear 0s 1 normal forwards running loading;
+	transform-box: fill-box;
+	transform-origin: 50% 50%
+}
+@keyframes loading {
+	0% {
+		transform: translateY(0px) translateX(0px);
+		height: 23.52px;
+		width: 141.63px;
+	}
+	100% {
+		transform: translateY(0px) translateX(0px);
+		height: 23.52px;
+		width: 141.63px;
+	}
+}

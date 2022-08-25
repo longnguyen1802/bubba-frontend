@@ -55,9 +55,12 @@ const Success = () => {
   return (
     resultFace&&
      <>
-      <h1>There is {resultFace.length} Image</h1>
-      <ListImage listImage={resultFace}/>
-      </>
+     <div className='homepage-container'>
+        <h1>There is {resultFace.length} Image</h1>
+        <ListImage listImage={resultFace}/>
+     </div>
+      
+    </>
   )
 }
 

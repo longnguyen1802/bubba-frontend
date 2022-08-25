@@ -14,7 +14,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  color: #56557D;
+  color: #000000;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
 }
 
 .home-title {

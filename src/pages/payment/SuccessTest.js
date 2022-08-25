@@ -4,6 +4,9 @@ import PreviewModal from '../../components/search/face/PreviewModal';
 import { useAPI } from '../../context/dataContext';
 import { URL } from '../../components/util/constant';
 import axios from 'axios';
+import loadingSvg from '../../Loading.svg'
+import LoadingIcons from 'react-loading-icons'
+
 const SuccessState = () => {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -22,7 +25,13 @@ const SuccessState = () => {
   return (
       <>
         {
-          success? <h1>"Go to here" </h1>: <h1></h1>
+          success ? 
+            <h1>"Go to here" </h1> 
+          : 
+            <div className='loading-container'>
+              <LoadingIcons.ThreeDots fill="#4D258E"/>
+              <h2>LOADING</h2>
+            </div>
         }
       </>
   )
