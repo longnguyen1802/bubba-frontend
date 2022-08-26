@@ -42,7 +42,7 @@ export default function Search() {
           <span>Catagory</span>
         </div>
         {/* catagory filter popup */}
-        <CatagoryModal open={CatagoryIsOpen} onClose={() => setCatagoryIsOpen(false)} selected={() => setSelectedCatagory(true)}/>
+        <CatagoryModal open={CatagoryIsOpen} onClose={() => setCatagoryIsOpen(false)} selected={() => setSelectedCatagory(true)} isAlbum={isAlbumSearch}/>
 
         <div className='filter-box' onClick={() => setDateIsOpen(true)}>
           <CalendarMonthOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
