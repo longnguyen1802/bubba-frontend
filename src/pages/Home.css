@@ -282,6 +282,7 @@ h2 {
   width: 100%;
   position: relative;
   gap: 10px;
+  min-height: 20px;
 }
 
 .face-icon {

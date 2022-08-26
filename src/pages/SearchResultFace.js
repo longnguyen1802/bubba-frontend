@@ -37,11 +37,11 @@ export default function SearchResultFace() {
     <div className='homepage-container'>
       <h2 className='search-result-title'> {listImage && listImage.length} results are found</h2>
       <Link to='/search' className='search-bar'> 
-        <input className='search-field' type="text" placeholder="(User input Text)"></input>
+        <input className='search-field' type="text" ></input>
       </Link>
       <div>
           <div className='with-face'>
-            <h4>There is {listImage.length} photos with your face</h4>
+            <h2>There are {listImage.length} photos with your face</h2>
             <div className="result-image-container">
             {
                 listImage && listImage.map((imageId,index)=>(
@@ -51,7 +51,7 @@ export default function SearchResultFace() {
             </div>
           </div>
           <div className='without-face'>
-            <h4>Here is {listNotFound.length} images without your face</h4>
+            <h2>Here are {listNotFound.length} photos without your face</h2>
             <div className="result-image-container">
             {
                 listNotFound && listNotFound.map((imageId,index)=>(
@@ -62,7 +62,7 @@ export default function SearchResultFace() {
           </div>
 
           <div className='not-yet-search'>
-            <h4>There is {listNotSearch.length} photo that maybe has your face?</h4>
+            <h4>There are {listNotSearch.length} photos that maybe has your face?</h4>
             <div className="result-image-container">
             {
                 listNotSearch && listNotSearch.map((imageId,index)=>(

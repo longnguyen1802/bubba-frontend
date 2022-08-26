@@ -137,8 +137,12 @@ export default function PreviewModal({open, onClose,quota}) {
 
   return ReactDom.createPortal(
         <>
-        <div className='overlay' />
-        <div className='modal'>
+        <div className='overlay' style={{
+          display: alertOpen ? 'none' : 'flex',
+        }}/>
+        <div className='modal' style={{
+          display: alertOpen ? 'none' : 'flex',
+        }}>
             <IconButton onClick={onClose} className='close'>
             <CloseIcon />
             </IconButton>

@@ -80,11 +80,11 @@ const Success = () => {
           resultFace&&
           <>
           <div className='homepage-container'>
-              <h1>There is {resultFace.length} Image</h1>
+              <h1>There is {resultFace.length} Image with your face!</h1>
               <ListImage listImage={resultFace}/>
           </div>
           <div className='without-face'>
-            <h4>Here is {remainingImage.length} images without your face</h4>
+            <h2>Here is {remainingImage.length} images without your face</h2>
             <ListImage listImage={remainingImage}/>
           </div>
           </>

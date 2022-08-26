@@ -28,7 +28,7 @@ export default function FaceModal({open, onClose}) {
 
   return ReactDom.createPortal(
     <>
-    <div className='overlay' />
+    {/* <div className='overlay' /> */}
     <div className='modal modal-face'>
       <div className='message-modal' style={{
           display: isActive ? 'none' : 'flex',
@@ -54,16 +54,15 @@ export default function FaceModal({open, onClose}) {
             </>
             :
             <>
-              <div className='modal-title'>
-                <p>Out of quota</p>
-              </div>
-              <div className='modal-text'>
-                You has 0 quota left upload your image to search
-              </div>
-              <div className='button-container'>
-                <button className='button go-button' onClick={() => setPreviewIsOpen(true)} >Go</button>
-              </div>
-
+                <div className='modal-title'>
+                  <p>Out of quota</p>
+                </div>
+                <div className='modal-text'>
+                  You has 0 quota left upload your image to search
+                </div>
+                <div className='button-container'>
+                  <button className='button go-button' onClick={() => setPreviewIsOpen(true)} >Go</button>
+                </div>
             </>
         }
         

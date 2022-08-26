@@ -7,6 +7,7 @@ import { useAPI } from '../context/dataContext';
 import ListAlbum from '../components/album/ListAlbum';
 import FaceFilterBox from '../components/search/face/FaceFilterBox';
 import { getNumberImage } from '../util/filter/filter';
+import { convertDate } from '../util/filter/convert';
 export default function SearchResultAlbum() {
   const {listAlbum,listAlbumThumbnail,listAlbumInfo,listAlbumDate,imageIds} = useAPI()
   const navigate = useNavigate();
@@ -29,13 +30,13 @@ export default function SearchResultAlbum() {
         <h1 className="home-title">{actualAlbumThumbnail.length} results are found</h1>
         <h1> There is total {numberImage} images</h1>
         <Link to='/search' className='search-bar'> 
-          <input className='search-field' type="text" placeholder="(User input text)"></input>
+          <input className='search-field' type="text" placeholder="Search here"></input>
         </Link>
         <div className='filter-row'>
-          <FilterTag />
+          {/* <FilterTag date={actualAlbumDate}/> */}
           <div className='add-icon'>
-            <IconButton >
-              <AddIcon />
+            <IconButton  >
+              <AddIcon/>
             </IconButton>
           </div>
         </div>

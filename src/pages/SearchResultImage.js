@@ -20,12 +20,12 @@ export default function SearchResultImage() {
     <div className='homepage-container'>
       <h2 className='search-result-title'> {currentImageId&& currentImageId.length} results are found</h2>
       <Link to='/search' className='search-bar'> 
-        <input className='search-field' type="text" placeholder="(User input Text)"></input>
+        <input className='search-field' type="text" placeholder="Search here"></input>
       </Link>
 
-      {/* <div className='filter-row'>
+      <div className='filter-row' > 
         
-          <FilterTag />
+          {/* <FilterTag /> */}
 
         <div className='add-icon'>
           <IconButton >
@@ -33,7 +33,7 @@ export default function SearchResultImage() {
           </IconButton>
         </div>
        
-      </div> */}
+      </div>
 
       {currentImageId && <ListImage listImage={currentImageId} /> }
       <FaceFilterBox />

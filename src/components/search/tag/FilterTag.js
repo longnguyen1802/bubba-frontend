@@ -1,8 +1,8 @@
 import React from 'react'
 import './FilterTage.css'
 
-export default function FilterTag() {
+export default function FilterTag({data}) {
   return (
-    <div className='filter-tag'>Dancing</div>
+    <div className='filter-tag'>{data}</div>
   )
 }
