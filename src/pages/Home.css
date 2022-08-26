@@ -309,6 +309,8 @@ h2 {
   flex-direction: row;
   gap: 12px;
   justify-content: space-evenly;
+  height: 400px;
+  overflow: scroll;
 }
 
 
@@ -417,4 +419,89 @@ h2 {
   gap: 5px;
   overflow: hidden;
   margin: 8px;
+}
+
+.card-image {
+  width: 388px;
+  height: 233px;
+}
+
+
+@media all and (min-width: 768px) {
+  .home-title {
+    display: none;
+  }
+  .search-bar {
+    display: none;
+  }
+  .card-image {
+    width: 350px;
+  }
+  .search-container {
+    align-items: center;
+    height: 100%;
+  }
+  .search-container-desktop {
+    width: 75%;
+    gap: 30px;
+  }
+  .search-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+  .search-type span{
+    font-weight: 400;
+    font-size: 24px;
+  }
+  .filter-type-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .filter-title {
+    font-weight: 400;
+    font-size: 24px;
+    color: #56557D;
+  }
+  .catagory-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 20px 0px;
+    width: 310px;
+    gap: 10px;
+  }
+  .date-container {
+    margin: 20px 0px;
+  }
+  .upload-container {
+    margin: 20px 0px;
+    width: 310px;
+  }
+  .upload-box {
+    background: #F6F6F8;
+    border: 1px dashed #777777;
+    border-radius: 20px;
+    width: 388px;
+    height: 199px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #777777;
+    font-weight: 400;
+    font-size: 24px;
+  }
+}
+@media all and (min-width: 992px) {
+  .card-image {
+    width: 410px;
+    height: 258px;
+  }
 }

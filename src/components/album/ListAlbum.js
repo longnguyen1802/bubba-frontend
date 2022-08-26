@@ -23,15 +23,13 @@ const ListAlbum = ({listAlbumThumbnail,listAllAlbum,navigateAlbum,listAlbumInfo,
             <div className={`album`+index} onClick={()=>{
                 navigateAlbum(listAllAlbum[index])
             }}>
-                <Card sx={{ maxWidth: "388px", borderRadius: "20px", marginTop: "20px"}}>
+                <Card sx={{ maxWidth: "410px", borderRadius: "20px", marginTop: "20px"}}>
                 <CardActionArea>
                     <Image
                         key={index}
                         cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
                         publicId={value}
                         className="card-image"
-                        width="388"
-                        height="233"
                         crop="scale"
                     />
                     <CardContent className='album-info'>
