@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link ,useLocation,useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { URL } from '../components/util/constant';
+import { URL ,PREFIX_URL} from '../components/util/constant';
 export default function ImageDetail() {
   const [photographer,setPhotographer] = useState();
   const location = useLocation();
@@ -38,12 +38,13 @@ export default function ImageDetail() {
           {<h2>Taken by {photographer}</h2>}
         </div>
         <div className='image-container'>
-          <Image
+          <img src={PREFIX_URL+albumId+'/'+imageId} alt="Default image" width="200" height="200"/>
+          {/* <Image
               cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
               publicId={"bubba_test/"+albumId+'/'+imageId}
               crop="scale"
               className="image-detail-result"
-          />
+          /> */}
         </div>
       </div>
     </>

@@ -85,51 +85,33 @@ export default function PreviewModal({open, onClose,quota}) {
           setErrMsg('something went wrong!');
       }; 
   };
-  const handleSearch = (e) => {
-      setSearch(true);
-      e.preventDefault();
-      if (!selectedFile) return;
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile);
-      reader.onloadend = async () => {
-          try {
-              const response = await fetch(URL+'/api/image/find', {
-                  mode:'cors',
-                  method: 'POST',
-                  body: JSON.stringify({ 
-                      data: reader.result,
-                      quota:quota ,
-                      listFolder:listAlbum}),
-                  headers: { 'Content-Type': 'application/json' },
-              });
-              setFileInputState('');
-              setPreviewSource('');
-              setFaceImageId(await response.json());
-              setSearch(false);
-              navigate('/search/result/face');
-          } catch (err) {
-              try{
-                  const response = await fetch(URL+'/api/image/find', {
-                  mode:'cors',
-                  method: 'POST',
-                  body: JSON.stringify({ data: reader.result,quota:quota ,listFolder:listAlbum}),
-                  headers: { 'Content-Type': 'application/json' },
-              });
-              setFileInputState('');
-              setPreviewSource('');
-              setFaceImageId(await response.json());
-              setSearch(false);
-              }
-              catch(err){
-                  console.error(err);
-                  setErrMsg('Something went wrong!');
-              }
-          }
-      };
-      reader.onerror = () => {
-          console.error('AHHHHHHHH!!');
-          setErrMsg('something went wrong!');
-      };
+  function toBuffer(ab) {
+    const buf = Buffer.alloc(ab.byteLength);
+    const view = new Uint8Array(ab);
+    for (let i = 0; i < buf.length; ++i) {
+        buf[i] = view[i];
+    }
+    return buf;
+}
+  const handleSearch = async (e) => {
+    setSearch(true);
+    e.preventDefault();
+    if (!selectedFile) return;
+    const resp = await selectedFile.arrayBuffer();
+    const response = await fetch(URL+'/api/image/find', {
+        mode:'cors',
+        method: 'POST',
+        body: JSON.stringify({ 
+            data: toBuffer(resp),
+            quota:quota ,
+            listFolder:listAlbum}),
+        headers: { 'Content-Type': 'application/json' },
+    });
+    setFileInputState('');
+    setPreviewSource('');
+    setFaceImageId(await response.json());
+    setSearch(false);
+    navigate('/search/result/face');
         
   };
   if(!open) return null

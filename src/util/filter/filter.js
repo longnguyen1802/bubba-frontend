@@ -53,7 +53,21 @@ export const dateFilter = async(startDate, endDate, setListAlbum, setCurrentImag
         .flat()
     );
 }
-
+export const tagFilter = async(listTag, setListAlbum, setCurrentImageId, imageIds) => {
+    const resp = await axios.get('http://localhost:3001/api/album/find', {
+        params: {
+            listTag: listTag,
+        }
+    });
+    const listAlbum = resp.data;
+    setListAlbum(resp.data)
+    setCurrentImageId(
+        imageIds
+        .filter((e) => (listAlbum.some(elem => (elem.toLowerCase() === e.folder.toLowerCase()))))
+        .map((e) => e.files)
+        .flat()
+    );
+}
 export const eventFilter = async(event, setListAlbum, setCurrentImageId, imageIds) => {
     const resp = await axios.get(URL + '/api/album/find', {
         mode: 'cors',

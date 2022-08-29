@@ -9,19 +9,19 @@ import Select from '@mui/material/Select';
 import ListAlbum from '../components/album/ListAlbum';
 export default function Home() {
     const {listAlbumThumbnail,listAllAlbum,listAlbumInfo,listAlbumDate} = useAPI()
-    const eventList = [
-        "GS1 Event",
-        "Community Connect Programme",
-        "Road To GBA Start-Up Programme 2.0 Launch Event",
-        "Investors Matching Programme",
-        "Jumpstarter 2022",
-        "Visit Of Shenzhen Hong Kong Macau Women Directors Alliance"
-    ]
+    // const eventList = [
+    //     "GS1 Event",
+    //     "Community Connect Programme",
+    //     "Road To GBA Start-Up Programme 2.0 Launch Event",
+    //     "Investors Matching Programme",
+    //     "Jumpstarter 2022",
+    //     "Visit Of Shenzhen Hong Kong Macau Women Directors Alliance"
+    // ]
     const navigate = useNavigate();
-    const [eventName, seteventName] = useState('');
-    const handleChange = (event) => {
-      seteventName(event.target.value);
-    };
+    // const [eventName, seteventName] = useState('');
+    // const handleChange = (event) => {
+    //   seteventName(event.target.value);
+    // };
     const navigateAlbum = (albumId) =>{
         navigate('/album/'+albumId);
     }
@@ -36,7 +36,7 @@ export default function Home() {
               <i className="material-icons">search</i>
               <input className='search-field' type="text" placeholder="Search here"></input>
             </Link>
-            <h3>Event Album</h3>
+            {/* <h3>Event Album</h3>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Event</InputLabel>
               <Select
@@ -58,7 +58,7 @@ export default function Home() {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
             <>
                 <h2>What's New</h2>
                 <ListAlbum listAlbumThumbnail={actualThumnail} listAllAlbum={listAllAlbum} 

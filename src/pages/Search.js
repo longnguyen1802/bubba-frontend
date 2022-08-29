@@ -89,14 +89,14 @@ export default function Search() {
             <button className={isImageSearch?'button image-button-focus':'button image-button'} onClick={() => {handleSearchType()}}>Image</button>
           </div>
 
-          <h3>Filter by</h3>
-          <div className='filter-container'>
-            <div className='filter-box' onClick={() => setCatagoryIsOpen(true)}>
-              <LocalOfferOutlinedIcon sx={{ fontSize: 45 }} className='filter-icon' />
-              <span>Catagory</span>
-            </div>
-            {/* catagory filter popup */}
-            <CatagoryModal open={CatagoryIsOpen} onClose={() => setCatagoryIsOpen(false)} selected={() => setSelectedCatagory(true)}/>
+      <h3>Filter by</h3>
+      <div className='filter-container'>
+        <div className='filter-box' onClick={() => setCatagoryIsOpen(true)}>
+          <LocalOfferOutlinedIcon sx={{ fontSize: 45 }} className='filter-icon' />
+          <span>Catagory</span>
+        </div>
+        {/* catagory filter popup */}
+        <CatagoryModal open={CatagoryIsOpen} onClose={() => setCatagoryIsOpen(false)} selected={() => setSelectedCatagory(true)} isAlbum={isAlbumSearch}/>
 
             <div className='filter-box' onClick={() => setDateIsOpen(true)}>
               <CalendarMonthOutlinedIcon sx={{ fontSize: 45 }}  className='filter-icon' />
