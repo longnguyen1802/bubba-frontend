@@ -9,7 +9,9 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { convertDate } from '../../util/filter/convert';
+import { PREFIX_URL } from '../util/constant';
 const ListAlbum = ({listAlbumThumbnail,listAllAlbum,navigateAlbum,listAlbumInfo,listAlbumDate}) => {
+  //console.log(listAlbumThumbnail,listAlbumInfo)
   return (
     <div className='album-container'>      
         {   
@@ -25,7 +27,8 @@ const ListAlbum = ({listAlbumThumbnail,listAllAlbum,navigateAlbum,listAlbumInfo,
             }}>
                 <Card sx={{ maxWidth: "388px", borderRadius: "20px", marginTop: "20px"}}>
                 <CardActionArea>
-                    <Image
+                    <img src={PREFIX_URL+value} alt="Default Image" width="388" height="233"/>
+                    {/* <Image
                         key={index}
                         cloudName={process.env.REACT_APP_CLOUDINARY_NAME||"dr4xcuczn"}
                         publicId={value}
@@ -33,7 +36,7 @@ const ListAlbum = ({listAlbumThumbnail,listAllAlbum,navigateAlbum,listAlbumInfo,
                         width="388"
                         height="233"
                         crop="scale"
-                    />
+                    /> */}
                     <CardContent className='album-info'>
                     <Typography gutterBottom component="div">
                         {listAlbumInfo[index]}
