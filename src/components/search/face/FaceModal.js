@@ -67,29 +67,7 @@ export default function FaceModal({open, onClose}) {
         }
         
       </div>
-
-      <div className='try-face-modal' id='try-face-modal' 
-        style={{
-          display: isActive ? 'flex' : 'none',
-        }}>
-        <div className='modal-title'>
-          Open file with
-        </div>
-        <div className='method-container'>
-          <div className='method-box camera'>
-            <div className='icon-box'></div>
-            <span>Camera</span>
-          </div>
-          <div className='method-box gallery' onClick={() => setPreviewIsOpen(true)}>
-            <div className='icon-box'></div>
-            <span>Gallery</span>
-          </div>
-          <PreviewModal open={PreviewIsOpen} onClose={() => setPreviewIsOpen(false) } quota={quota.limit} />
-
-        </div>
-        <div className='divider' />
-        <button className='button cancel-button' onClick={onClose} >Cancel</button>
-      </div>
+      <PreviewModal open={PreviewIsOpen} onClose={() => setPreviewIsOpen(false) } quota={quota.limit} />
 
     </div>
     </>,

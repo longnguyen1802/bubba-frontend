@@ -309,7 +309,7 @@ h2 {
   flex-direction: row;
   gap: 12px;
   justify-content: space-evenly;
-  height: 400px;
+  height: 600px;
   overflow: scroll;
 }
 
@@ -426,7 +426,7 @@ h2 {
   height: 233px;
 }
 
-
+/* For desktop versoin */
 @media all and (min-width: 768px) {
   .home-title {
     display: none;
@@ -482,6 +482,7 @@ h2 {
   .upload-container {
     margin: 20px 0px;
     width: 310px;
+    cursor: pointer;
   }
   .upload-box {
     background: #F6F6F8;

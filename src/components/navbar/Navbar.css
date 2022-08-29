@@ -20,6 +20,8 @@
 .advance-search {
   display: none;
 }
+
+/* For desktop version */
 @media all and (min-width: 768px) {
   .advance-search {
     display: block;
